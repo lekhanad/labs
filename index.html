@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <h2>            part A            </h2>
+            <h4>Question 1</h4>
+            <p><pre>
+                #include <stdio.h>
+                    int main() {
+                     char line[150];
+                     
+                     printf("Enter a string: ");
+                     fgets(line, sizeof(line), stdin); 
+                     for (int i = 0, j; line[i] != '\0'; ++i) {
+                     
+                     while (!(line[i] >= 'a' && line[i] <= 'z') && !(line[i] >= 'A' && line[i] <= 'Z') && 
+                    !(line[i] == '\0')) {
+                     for (j = i; line[j] != '\0'; ++j) {
+                     
+                     line[j] = line[j + 1];
+                     }
+                     line[j] = '\0';
+                     }
+                     }
+                     printf("Output String: ");
+                    puts(line);
+                     return 0;
+                    }
+                </pre>
+            </p>
+            <h4>Question 2</h4>
+            <p>
+                <pre>
+                    #include<stdio.h>
+                        int main() 
+                        { 
+                        int n, sum=0, firstDigit, lastDigit;
+                        printf("Enter number to find sum of first and last digit = ");
+                        scanf("%d", &n);
+                        lastDigit = n % 10;
+                        while(n >= 10) { n = n / 10;
+                        } 
+                        firstDigit = n ;
+                        sum = firstDigit + lastDigit;
+                        printf("Sum of first and last digit = %d", sum); 
+                        return 0;
+                        }
+                </pre>
+            </p>
+            <h4>Question 3</h4>
+            <p><pre>
+                #include<stdio.h>
+                    int main()
+                   {
+                    int a, sq;
+                    scanf("%d", &a);
+                    sq = a * a;
+                    sq = sq % 10;
+                    if(a==sq)
+                   printf("Automorphic Number");
+                   else
+                   printf("Not Automorphic Number");
+                   }
+            </pre></p>
+            <h4>Question 4</h4>
+            <p><pre>
+                #include<stdio.h>
+                    int main()
+                    {
+                    int a;
+                    scanf("%d", &a);
+                     if(a>=0)
+                     printf("Positive");
+                     else
+                     printf("Negative");
+                    }
+            </pre></p>
+            <h4>Question 5</h4>
+            <p><pre>
+                #include <stdio.h>
+                    int main() 
+                    { 
+                     int year;
+                    printf("Enter a year: ");
+                     scanf("%d", &year);
+                     if (year % 400 == 0) 
+                     {
+                     printf("%d is a leap year.", year);
+                     }
+                     else if (year % 100 == 0) 
+                    {
+                     printf("%d is not a leap year.", year);
+                     }
+                     else if (year % 4 == 0) 
+                    {
+                     printf("%d is a leap year.", year);
+                     }
+                     else 
+                    {
+                     printf("%d is not a leap year.", year);
+                     }
+                     return 0; 
+                    }
+            </pre></p>
+            <h4>Question 6</h4>
+            <p><pre>
+                #include<stdio.h>
+                    int main()
+                    {
+                    char c;
+                    scanf("%c", &c);
+                    if(c=='A'||c=='a'||c=='E'|| c=='e'|| c=='I'|| c=='i'|| c=='o'|| c=='O'|| c=='U' || c=='u')
+                    {
+                    printf("ASCII of %c is %d", c, c);
+                    }
+                    else
+                    printf("Not vowel");
+                    }
+            </pre></p>
+            <h4>Question 7</h4>
+            <p><pre>
+                #include<stdio.h>
+                    int main()
+                    {
+                     int x,n=5,i;
+                     printf("Enter n value\n");
+                     scanf("%d",&x);
+                     for(i=1;i<=x*2;i++)
+                     {
+                     if(i%2!=0)
+                     {
+                     n=n+i;
+                     printf("%d ",n) ; 
+                     }
+                     }
+                     return 0;
+                     }
+            </pre></p>
+            <h4>Question 8</h4>
+            <p><pre>
+                #include<stdio.h>
+                    int main()
+                    {
+                     int i,a,b;
+                     scanf("%d %d",&a,&b);
+                     for(i=1;i<=b;i++)
+                     {
+                     printf("%d * %d = %d\n",a,i,a*i);
+                     }
+                     return 0;
+                    }
+            </pre></p>
+            <h4>Question 9</h4>
+            <p><pre>
+                #include<stdio.h>
+                    int sum(int n)
+                    {
+                     if(n != 0)
+                    return n + sum(n - 1);
+                     else
+                     return 0;
+                    }
+                    int main()
+                    {
+                    int n,result;
+                    scanf("%d",&n);
+                     result=sum(n);
+                     printf("%d",result);
+                     return 0;
+                    }
+
+            </pre></p>
+            <h4>
+                Part B
+            </h4>
+            <h4>Question1</h4>
+            <p><pre>
+                #include <stdio.h>
+                    int main() {
+                     char line[150];
+                     
+                     printf("Enter a string: ");
+                     fgets(line, sizeof(line), stdin); 
+                     for (int i = 0, j; line[i] != '\0'; ++i) {
+                     
+                     while (!(line[i] >= 'a' && line[i] <= 'z') && !(line[i] >= 'A' && line[i] <= 'Z') && 
+                    !(line[i] == '\0')) {
+                     for (j = i; line[j] != '\0'; ++j) {
+                     
+                     line[j] = line[j + 1];
+                     }
+                     line[j] = '\0';
+                     }
+                     }
+                     printf("Output String: ");
+                    puts(line);
+                     return 0;
+                    }
+            </pre></p>
+            <h4>Question 2</h4>
+            <p>
+            <pre>
+                #include <stdio.h>
+                    int main()
+                    {
+                     int m,n; //Matrix Size Declaration
+                     printf("Enter the number of rows and column: \n");
+                     scanf("%d %d",&m,&n); //Matrix Size Initialization
+                     int arr[10][10]; //Matrix Size Declaration
+                     printf("\nEnter the elements of the matrix: \n");
+                     for(int i=0;i<m;i++) //Matrix Initialization
+                     {
+                     for(int j=0;j<n;j++)
+                     {
+                     scanf("%d",&arr[i][j]);
+                     }
+                     }
+                     printf("\nThe elements in the matrix are: \n");
+                     for(int i=0;i<m;i++) //Print the matrix
+                    {
+                     for(int j=0;j<n;j++)
+                     {
+                     printf("%d ",arr[i][j]);
+                     }
+                     printf("\n");
+                     }
+                     int i = 0, j;
+                     int max = 0;
+                     int res[m];
+                     while (i < m) //Check for the largest element in an array
+                     {
+                     for ( j = 0; j < n; j++)
+                     {
+                     if (arr[i][j] > max)
+                     {
+                     max = arr[i][j];
+                     }
+                     }
+                     res[i] = max;
+                     max = 0;
+                     i++;
+                     }
+                     for(int i = 0; i < n; i++) //Print the largest element in an array
+                    {
+                     printf("Largest element in row %d is %d \n", i, res[i]);
+                     }
+                     
+                     return 0;
+                    }
+            </pre></p>
+            <h4>Question 3</h4>
+            <h4>Question 4</h4>
+            <p><pre>
+                #include <stdio.h>
+                    #include <math.h>
+                    long long convert(int);
+                    int main() {
+                     int n, bin;
+                     printf("Enter a decimal number: ");
+                     scanf("%d", &n);
+                     bin = convert(n);
+                     printf("%d in decimal = %ld in binary", n, bin);
+                     return 0;
+                    }
+                    long long convert(int n) {
+                     long long bin = 0;
+                     int rem, i = 1;
+                    while (n!=0) {
+                     rem = n % 2;
+                     n /= 2;
+                     bin += rem * i;
+                     i *= 10;
+                     }
+                     return bin;
+                    }
+            </pre></p>
+            <h4>Question 5</h4>
+            <p><pre>
+                #include<stdio.h>
+                    #include<stdlib.h>
+                    struct node
+                    {
+                      int data;
+                      struct node*next;
+                    };
+                    struct node*head;
+                    void append(int d)
+                    {
+                      struct node*newnode,*temp;
+                      temp=head;
+                      newnode=(struct node*)malloc(sizeof(struct node));
+                      newnode->data=d;
+                      newnode->next=NULL;
+                      if(head==NULL)
+                      {
+                        head=newnode;
+                      }else
+                      {
+                        while(temp->next!=NULL)
+                        {
+                          temp=temp->next;
+                        }
+                        temp->next=newnode;
+                      }
+                    }
+                    void display()
+                    {
+                      struct node*temp=head;
+                      while(temp!=NULL)
+                      {
+                        printf("%d ",temp->data);
+                        temp=temp->next;
+                      }
+                    }
+                    int main()
+                    {
+                      int d;
+                      do
+                      {
+                        scanf("%d",&d);
+                        if(d>0)
+                        {
+                          append(d);
+                        }
+                      }while(d>-1);
+                        display();
+                      return 0;
+                    }
+            </pre></p>
+            <h4>Question 6</h4>
+            <p><pre>
+                #include<stdio.h>
+                    #include<stdlib.h>
+                    
+                    
+                    struct node
+                    {
+                    int data;
+                    struct node *link;
+                    };
+                    struct node *head;
+                    void append(int d)
+                    {
+                        struct node *temp,*newnode;
+                        temp=head;
+                        newnode=malloc(sizeof(struct node));
+                        newnode->data=d;
+                        newnode->link=NULL;
+                        if(head==NULL)
+                        {
+                            head=newnode;
+                        }
+                        else
+                        {
+                        while(temp->link!=NULL)
+                        {
+                            temp=temp->link;
+                        }
+                        temp->link=newnode;
+                        }
+                    }
+                    void display()
+                    {
+                        int count=0;
+                        struct node *temp=head;
+                        while(temp!=NULL)
+                        {
+                            count++;
+                            temp=temp->link;
+                        }
+                        printf("%d",count);
+                    }
+                    int main()
+                    {
+                        int d;
+                      do
+                      {
+                        scanf("%d",&d);
+                        if(d>0)
+                        {
+                          append(d);
+                        }
+                      }while(d>-1);
+                        display();
+                      return 0;
+                    }
+            </pre></p>
+            <h4>Question 7</h4>
+            <p><pre>
+                #include <stdio.h>
+                    //#define CAPACITY 3
+                    int stack[100];
+                    int top=-1;
+                    void push(int ele,int n)
+                    {
+                        
+                        if(top==n-1)
+                        {
+                            printf("Stack is full\n");
+                        }
+                        else
+                        {
+                            top++;
+                            stack[top]=ele;
+                            
+                        }
+                    }
+                    void pop(int n)
+                    {
+                      
+                      int ele;
+                      if(top==-1)
+                      {
+                        printf("Stack is empty\n");
+                      }
+                      else
+                      {
+                        ele=stack[top];
+                        printf("The popped element is %d\n",ele);
+                        top--;
+                        
+                      }
+                    }
+                    void display(int n)
+                    {
+                      if(top==-1)
+                      {
+                        printf("The contents of the stack are {}\n");
+                      }
+                      else
+                      {
+                        printf("The contents of the stack are ");
+                        for(int i=0;i<=top;i++)
+                        {
+                          printf("%d ",stack[i]);
+                        }
+                        
+                      }
+                    }
+                          
+                    
+                    int main()
+                    {
+                      int n;
+                      printf("Enter the maximum size of the stack\n");
+                      scanf("%d",&n);
+                      int choice,ele;
+                      do
+                      {
+                        printf("Choice 1 : Push\nChoice 2 : Pop\nChoice 3 : Display\nAny other choice : Exit\n");
+                        printf("Enter your choice\n");
+                        scanf("%d",&choice);
+                        switch(choice)
+                        {
+                          case 1:
+                            printf("Enter the element to be pushed\n");
+                            scanf("%d",&ele);
+                            push(ele,n);
+                            break;
+                          case 2:
+                            pop(n);
+                            break;
+                          case 3:
+                            display(n);
+                            
+                            break;
+                            
+                        }
+                        printf("\nAny other choice : Exit\n");
+                      }while(choice!=4);
+                            
+                    
+                    }
+            </pre></p>
+            <h4>Question 8</h4>
+            <p><pre>
+                #include <stdio.h>
+                    #include<stdlib.h>
+                    struct node
+                    {
+                        int data;
+                        struct node* next;
+                    };
+                    struct node *front=NULL;
+                    struct node *rear=NULL;
+                    int enque(int d)
+                    {
+                        struct node* new;
+                        new=(struct node*)malloc(sizeof(struct node));
+                        new->data=d;
+                        new->next=NULL;
+                        if((front==NULL)&&(rear==NULL))
+                        {
+                            front=rear=new;
+                        }
+                        else
+                        {
+                            rear->next=new;
+                            rear=new;
+                        }
+                        
+                    }
+                    void display()
+                    {
+                        printf("The contents of the queue are ");
+                        struct node *temp=front;
+                        if(temp==NULL)
+                        {
+                            printf("{}");
+                        }
+                        else
+                        {
+                            while(temp!=NULL)
+                            {
+                                printf("%d ",temp->data);
+                                temp=temp->next;
+                                
+                            }
+                            
+                        }
+                        printf("\n");
+                    }
+                    
+                    int main()
+                    {
+                       int c,n;
+                        do{
+                            printf("Choice 1 : Enter element into Queue\nChoice 2 : Display\nAny other choice : Exit\nEnter your choice\n");
+                            scanf("%d",&c);
+                            switch(c)
+                            {
+                                case 1:
+                                      printf("Enter the element to be inserted/entered\n");
+                                       scanf("%d",&n);
+                                       enque(n);
+                                       break;
+                                case 2:display();
+                                       break;
+                            }
+                        }while(c!=-1);
+                    }
+            </pre></p>
+            <h4>Question 9</h4>
+           <h4> Question 10</h4>
+            <p><pre>
+                #include <stdio.h>
+                    #include<stdlib.h>
+                    struct node
+                    {
+                        int data;
+                        struct node *left;
+                        struct node *right;
+                    };
+                    struct node *root=NULL;
+                    void insert(int d)
+                    {
+                        struct node *temp;
+                        temp=root;
+                        struct node *new;
+                        new=(struct node*)malloc(sizeof(struct node));
+                        new->data=d;
+                        new->left=NULL;
+                        new->right=NULL;
+                        if(root==NULL)
+                        {
+                            root=new;
+                        }
+                        else
+                        {
+                            while(1)
+                            {
+                                if(d<(temp->data))
+                                {
+                                    if(temp->left!=NULL)
+                                    {
+                                        temp=temp->left;
+                                    }
+                                    else
+                                    {
+                                        temp->left=new;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    if(temp->right!=NULL)
+                                    {
+                                        temp=temp->right;
+                                    }
+                                    else
+                                    {
+                                        temp->right=new;
+                                        break;
+                                    }
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                    void inorder(struct node *temp)
+                    {
+                        if(temp==NULL)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            inorder(temp->left);
+                            printf("%d ",temp->data);
+                            inorder(temp->right);
+                        }
+                    }
+                    
+                    int main()
+                    {
+                        int d;
+                        do{
+                            printf("Enter a data:\n");
+                            scanf("%d",&d);
+                            if(d>0)
+                            {
+                                insert(d);
+                            }
+                        }while(d>0);
+                        printf("\nInorder: ");
+                        inorder(root);
+                        return 0;
+                    }
+            </pre></p>
+
+
+        </div>
+</div>
+</body>
+</html>
