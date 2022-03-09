@@ -11,32 +11,38 @@
         <div>
             <h2>            part A            </h2>
             <h4>Question 1</h4>
+            <p>Write a C program to perform arithmetic operations such as addition, subtraction,
+                multiplication, modulo division and division. <br>
+                INPUT & OUTPUT FORMAT: Input consists of two integers Output consists of integers.
+                Input 
+                a.5
+                b.2
+                Output
+                7
+                3
+                10
+                1
+                2
+            </p>
             <p><pre>
-                #include <stdio.h>
-                    int main() {
-                     char line[150];
-                     
-                     printf("Enter a string: ");
-                     fgets(line, sizeof(line), stdin); 
-                     for (int i = 0, j; line[i] != '\0'; ++i) {
-                     
-                     while (!(line[i] >= 'a' && line[i] <= 'z') && !(line[i] >= 'A' && line[i] <= 'Z') && 
-                    !(line[i] == '\0')) {
-                     for (j = i; line[j] != '\0'; ++j) {
-                     
-                     line[j] = line[j + 1];
-                     }
-                     line[j] = '\0';
-                     }
-                     }
-                     printf("Output String: ");
-                    puts(line);
-                     return 0;
+                #include<stdio.h>
+                    int main()
+                    {
+                    int a,b,c,d,e,f,g;
+                     scanf("%d",&a);
+                     scanf("%d",&b);
+                     c=a+b;
+                     d=a-b;
+                     e=a*b;
+                    f=a%b;
+                    g=a/b;
+                     printf("%d\n%d\n%d\n%d\n%d\n",c,d,e,f,g);
                     }
                 </pre>
             </p>
             <h4>Question 2</h4>
             <p>
+                <p>Write a C program to find the sum of the first and last digit for the given number</p>
                 <pre>
                     #include<stdio.h>
                         int main() 
@@ -55,6 +61,11 @@
                 </pre>
             </p>
             <h4>Question 3</h4>
+            <p>Write a C program to check whether the given number is automorphic number or not.
+                An automorphic number is a number whose square ends with the number itself. For example, 5 is
+                an automorphic number as 5*5 =25. The last digit is 5 which is the same as the given number. It
+                has only positive single digit numbers. If it is an automorphic number display “Automorphic
+                Number” else display “Not Automorphic Number”. </p>
             <p><pre>
                 #include<stdio.h>
                     int main()
@@ -70,6 +81,7 @@
                    }
             </pre></p>
             <h4>Question 4</h4>
+            <p>Write a C program to find whether the given number is positive or negative</p>
             <p><pre>
                 #include<stdio.h>
                     int main()
@@ -83,6 +95,8 @@
                     }
             </pre></p>
             <h4>Question 5</h4>
+            <p>Write a C program to find whether the given year is a leap year or noWrite a C program to find
+                <br> whether the given year is a leap year or noWrite a C program to find whether the given year is a leap year or no</p>
             <p><pre>
                 #include <stdio.h>
                     int main() 
@@ -110,6 +124,9 @@
                     }
             </pre></p>
             <h4>Question 6</h4>
+            <p>Write a C program to display the ASCII value of vowels for both upper case and lower case
+                letters. If the given character is not a vowel, display "Not a vowel" and If it is a vowel then
+                display the "ASCII value of the vowel". </p>
             <p><pre>
                 #include<stdio.h>
                     int main()
@@ -125,6 +142,7 @@
                     }
             </pre></p>
             <h4>Question 7</h4>
+            <h5>Write a C program to generate the following series 6, 9, 14, 21, 30…</h5>
             <p><pre>
                 #include<stdio.h>
                     int main()
@@ -144,7 +162,12 @@
                      }
             </pre></p>
             <h4>Question 8</h4>
+            <p>Write a C program to find the multiplication tables of a given number.
+                INPUT & OUTPUT FORMAT: Input consists of 2 integers. First input corresponds to the
+                number for which the multiplication tables have to be generated. Second input corresponds to the
+                number until which the tables need to be generated.</p>
             <p><pre>
+
                 #include<stdio.h>
                     int main()
                     {
@@ -158,7 +181,9 @@
                     }
             </pre></p>
             <h4>Question 9</h4>
+            <p>Write a C program to find the sum of first 'n' natural numbers by recursion</p>
             <p><pre>
+
                 #include<stdio.h>
                     int sum(int n)
                     {
@@ -181,6 +206,7 @@
                 Part B
             </h4>
             <h4>Question1</h4>
+            <p>Write a C program to remove all the characters from the given string that are not alphabet</p>
             <p><pre>
                 #include <stdio.h>
                     int main() {
@@ -205,6 +231,9 @@
                     }
             </pre></p>
             <h4>Question 2</h4>
+            <p>
+                Write a C program to find the element of maximum value in each row
+            </p>
             <p>
             <pre>
                 #include <stdio.h>
@@ -256,7 +285,45 @@
                     }
             </pre></p>
             <h4>Question 3</h4>
+            <p>Write a C program to remove the duplicate elements from an array. </p>
+            <p><pre>
+                    #include <stdio.h>
+                    #include <stdlib.h>
+                    void removeDuplicate(int n, int *a)
+                    
+                    {
+                    int i,j,temp,k;
+                    for(i=0;i<n;i++)
+                    {
+                    temp=(*(a+i));
+                    for(j=i+1;j<n;j++)
+                    {
+                    if(temp==(*(a+j)))
+                    {
+                    for(k=j;j<n-1;k++)
+                    {
+                    (*(a+k))=(*(a+k+1));
+                    }
+                    n--;
+                    }
+                    }
+                    }
+                    for(i=0;i<n;i++) 
+                    printf("%d\n", (*(a+i)));
+                    }
+                    int main()
+                    {
+                    int n,i;
+                    scanf("%d",&n); 
+                    int*z=(int*)malloc(n*sizeof(int)); 
+                    for(i=0;i<n;i++) 
+                    scanf("%d",(z+i)); 
+                    removeDuplicate(n,z);
+                    }
+            <pre></pre></p>
+
             <h4>Question 4</h4>
+            <p>Write a C program to convert a decimal number to a binary number by recursion</p>
             <p><pre>
                 #include <stdio.h>
                     #include <math.h>
@@ -282,6 +349,7 @@
                     }
             </pre></p>
             <h4>Question 5</h4>
+            <p>Write a C program to append elements at the end of the linked list.</p>
             <p><pre>
                 #include<stdio.h>
                     #include<stdlib.h>
@@ -335,6 +403,7 @@
                     }
             </pre></p>
             <h4>Question 6</h4>
+            <p>Write a C program to count the number of elements present in a linked list.</p>
             <p><pre>
                 #include<stdio.h>
                     #include<stdlib.h>
@@ -393,6 +462,8 @@
                     }
             </pre></p>
             <h4>Question 7</h4>
+            <p>Write a C program to push the elements into the stack, pop out all the elements and also display the
+                elements in the stack (Implement this logic using stack using linked list).</p>
             <p><pre>
                 #include <stdio.h>
                     //#define CAPACITY 3
@@ -480,6 +551,8 @@
                     }
             </pre></p>
             <h4>Question 8</h4>
+            <p>Write a C program to add the elements into a queue and print the elements in the queue
+                (Implement this logic using the queue using linked list)</p>
             <p><pre>
                 #include <stdio.h>
                     #include<stdlib.h>
@@ -548,7 +621,10 @@
                     }
             </pre></p>
             <h4>Question 9</h4>
+            <p>Write a program to obtain the adjacency matrix representation of a graph.</p>
            <h4> Question 10</h4>
+           <p>Implement a C program to construct a Binary Search Tree and also display the elements in
+            the tree using Inorder, traversal. </p>
             <p><pre>
                 #include <stdio.h>
                     #include<stdlib.h>
