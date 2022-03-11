@@ -286,41 +286,42 @@
             </pre></p>
             <h4>Question 3</h4>
             <p>Write a C program to remove the duplicate elements from an array. </p>
-            <p><pre>
-                    #include <stdio.h>
-                    #include <stdlib.h>
-                    void removeDuplicate(int n, int *a)
-                    
-                    {
-                    int i,j,temp,k;
-                    for(i=0;i<n;i++)
-                    {
-                    temp=(*(a+i));
-                    for(j=i+1;j<n;j++)
-                    {
-                    if(temp==(*(a+j)))
-                    {
-                    for(k=j;j<n-1;k++)
-                    {
-                    (*(a+k))=(*(a+k+1));
-                    }
-                    n--;
-                    }
-                    }
-                    }
-                    for(i=0;i<n;i++) 
-                    printf("%d\n", (*(a+i)));
-                    }
-                    int main()
-                    {
-                    int n,i;
-                    scanf("%d",&n); 
-                    int*z=(int*)malloc(n*sizeof(int)); 
-                    for(i=0;i<n;i++) 
-                    scanf("%d",(z+i)); 
-                    removeDuplicate(n,z);
-                    }
-            <pre></pre></p>
+         <p><pre>
+            #include <stdio.h>
+                #include <stdlib.h>
+                void removeDuplicate(int n, int *a)
+                
+                {
+                int i,j,temp,k;
+                for(i=0;i<=n;i++)
+                {
+                temp=(*(a+i));
+                for(j=i+1;j<=n;j++)
+                {
+                if(temp==(*(a+j)))
+                {
+                for(k=j;j<=n-1;k++)
+                {
+                (*(a+k))=(*(a+k+1));
+                }
+                n--;
+                }
+                }
+                }
+                for(i=0;i<=n;i++) 
+                printf("%d\n", (*(a+i)));
+                }
+                int main()
+                {
+                int n,i;
+                scanf("%d",&n); 
+                int*z=(int*)malloc(n*sizeof(int)); 
+                for(i=0;i<=n;i++) 
+                scanf("%d",(z+i)); 
+                removeDuplicate(n,z);
+                }
+            </pre>
+         </p>
 
             <h4>Question 4</h4>
             <p>Write a C program to convert a decimal number to a binary number by recursion</p>
