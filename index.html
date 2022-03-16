@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -326,7 +326,7 @@
             <h4>Question 4</h4>
             <p>Write a C program to convert a decimal number to a binary number by recursion</p>
             <p><pre>
-                #include <stdio.h>
+                #include stdio.h
                     #include <math.h>
                     long long convert(int);
                     int main() {
@@ -716,5 +716,253 @@
 
         </div>
 </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p>
+            <pre>
+                EXP1 - Determination of Entropy of given source <br>
+clc;
+clear all;
+i=input('Enter the no. of elements=);
+p=input('Enter probablities');
+sum=0;
+for n=1:1:i
+ I=log2(1/p(n));
+ H=sum+(p(n).*I);
+ sum=H;
+end
+disp('H(x): ');
+disp(H);
+            </pre>
+        </p>
+        <pre>
+            EXP2 - Generation and evaluation of a variable length source coding using Huffman coding <br>
+clc;clear;
+symbols=[1:7];
+p=input("enter the probblity of the symbols=")
+[QM,L,avglen,entr,eff]= huffmandict(symbols,p);
+disp(L,'number of bits used for the symbols");
+disp(QM,'code table');
+disp(avglen,'avrage length');
+disp(entr,'entropy');
+disp(eff,'efficency');
+        </pre>
+        <p>
+            <pre>
+                EXP3 – determination of various Entropies and mutual information of Noise free channel
+clc;
+clear;close;
+i=input('Enter no. of elements=');
+q=input('Enter joint probabilities matrix=');
+sum=0;
+//probability P(x)
+for n=1:1:i
+w=0;
+for m=1:1:i
+p(n)=w+q(n,m)
+w=p(n);
+end
+end
+disp('P(x):');
+disp(p);
+//entropy H(x)
+for n=1:i
+H=sum+(p(n)*log2(1/p(n)));
+sum=H;
+end
+disp('H(x): ');
+disp(H);
+//conditional probability matrix
+for n=1:1:i
+for m=1:1:i
+a(n,m)=q(n,m)/p(n);
+end
+end
+disp('P(Y/X):');
+disp(a);
+//entropy H(Y/X)
+d=0;
+for n=1:1:i
+for m=1:1:i
+if(a(n,m)>0)
+H1=d+(q(n,m)*log2(1/a(n,m)));
+d=H1
+end
+end
+end
+disp('H(Y/X):');
+disp(H1);
+//MI
+m=H-H1;
+disp('MI=');
+disp(m);
+// probability P(Y)
+for n=1:1:i
+w=0;
+for m=1:1:i
+s(n)=w+q(m,n);
+w=s(n);
+end
+end
+disp('P(Y):');
+disp(s);
+//entropy H(Y)
+k=0;
+for n=1:1:i
+H2=k+(s(n)*log2(1/s(n)));
+k=H2;
+end
+disp('H(Y): ');
+disp(H2)
+            </pre>
+        </p>
+        <p><pre>
+            EXP4 – Determination of various Entropies and mutual information of given BSC Channel
+clc;
+clear;
+close;
+i=input('Enter no. of elements=');
+p=input('Enter probability=');
+q=input('Enter conditional probabilities matrix=');
+sum=0;
+// entropy H(x)
+for n=1:1:i
+ if p(n) > 0
+ H=sum+(p(n)*log2(1/p(n)));
+ end
+sum=H;
+end
+disp('H(x): ');
+disp(H);
+//Joint probability matrix
+for n=1:1:i
+ for m=1:1:i
+ a(n,m)=q(n,m)*p(n);
+ end
+end
+disp('P(X,Y):');
+disp(a);
+// entropy H(Y/X)
+d=0;
+H1=0;
+for n=1:1:i
+ for m=1:1:i
+ if q(n,m) > 0
+ H1=d+(a(n,m)*log2(1/q(n,m)));
+ end
+d=H1;
+end
+end
+disp('H(Y/X):');
+disp(H1);
+// probability P(Y)
+for n=1:1:i
+ w=0;
+ for m=1:1:i
+ s(n)=w+a(m,n);
+ w=s(n);
+ end
+end
+disp('P(Y):');
+disp(s);
+//entropy H(Y)
+k=0;
+for n=1:1:i
+ if s(n) > 0
+ H2=k+(s(n)*log2(1/s(n)));
+ end
+k=H2;
+end
+disp('H(Y): ');
+disp(H2);
+//Find Mutual Information
+m=H2-H1;
+disp('MI=');
+disp(m);
+// entropy H(Y,X)
+d=0;
+H3 = 0;
+for n=1:1:i
+ for m=1:1:i
+ if a(n,m) > 0
+ H3=d+(a(n,m)*log2(1/a(n,m)));
+ end
+d=H3;
+ end
+end
+disp('H(Y,X):');
+disp(H3);
+        </pre></p>
+        <p><pre>
+            EXP5 – Generate a codeword using linear block code and decoding of the Received vector using Syndrome
+clc;
+clear;
+k = 4;
+n = 7;
+P = [1 1 1;1 1 0;1 0 1;0 1 1]
+disp(P,'Parity Matrix P')
+H=[P;eye(n-k,n-k)]'
+disp(H,'Parity Check Matrix H')
+R=input("Enter the n bit received code vector:")
+S=R*H'
+S = modulo(S,2);
+disp(S,'Syndrome Matrix R*H(transpose)')
+if S==[0 0 0] then
+disp(R,'Received Code without error')
+disp(R(1:4),'Received Information Message')
+else
+ErrPos=1
+d=[H(:,ErrPos)]'
+disp('d is')
+disp(d)
+while ((d(1)<>S(1))|(d(2)<>S(2))|(d(3)<>S(3))) do
+ErrPos=ErrPos+1
+d=[H(:,ErrPos)]'
+end
+disp(ErrPos,'Erroneous Bit Position')
+if R(ErrPos)==0 then
+R(ErrPos)=1
+disp(R,'Received Code with error corrected')
+disp(R(1:4),'Received Information Message')
+else
+R(ErrPos)=0
+disp(R,'Received Code with error corrected')
+disp(R(1:4),'Received Information Message')
+end
+end
+        </pre></p>
+        <p><pre>
+            EXP6 – Realize the convolutional code for given generator Sequence
+clc;clear;
+g1 = input('Enter the input Top Adder Sequence:=')
+g2 =input('Enter the input bottom Adder Sequence:=')
+//g3 = input('Enter the input Adder Sequence:=')
+m = input('Enter the message sequence:=')
+x1 = round(convol(g1,m));
+x2 = round(convol(g2,m));
+//x3 = round(convol(g3,m));
+x1 = modulo(x1,2);
+x2 = modulo(x2,2);
+//x3 = modulo(x3,2);
+N = length(x1);
+disp(N);
+for i =1:length(x1)
+x(i,:)=[x1(i),x2(i)];//,x3(N-i+1)];
+end
+x = string(x);
+disp(x)
+        </pre></p>
+    </div>
 </body>
 </html>
