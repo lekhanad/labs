@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,117 +11,268 @@
         <div>
             <h2>            part A            </h2>
             <h4>Question 1</h4>
-            <p>Write a C program to perform arithmetic operations such as addition, subtraction,
-                multiplication, modulo division and division. <br>
-                INPUT & OUTPUT FORMAT: Input consists of two integers Output consists of integers.
-                Input 
-                a.5
-                b.2
-                Output
-                7
-                3
-                10
-                1
-                2
+            <p>Design and analyze a divide and conquer algorithm for following maximum subarray sum problem, given an array of integers find a sub-array [a contagious portion of the array] which gives the maximum sum
             </p>
             <p><pre>
-                #include<stdio.h>
-                    int main()
-                    {
-                    int a,b,c,d,e,f,g;
-                     scanf("%d",&a);
-                     scanf("%d",&b);
-                     c=a+b;
-                     d=a-b;
-                     e=a*b;
-                    f=a%b;
-                    g=a/b;
-                     printf("%d\n%d\n%d\n%d\n%d\n",c,d,e,f,g);
-                    }
+                #include <stdio.h>
+#include <limits.h>
+
+int max1(int a, int b) 
+{ 
+	return (a > b)? a : b; 
+}
+
+int max2(int a, int b, int c) 
+{ 
+	return max1(max1(a, b), c); 
+}
+
+int maxCrossingSum(int arr[], int l, int m, int h)
+{
+	int sum = 0;
+	int left_sum = INT_MIN;
+	for (int i = m; i >= l; i--)
+	{
+		sum = sum + arr[i];
+		if (sum > left_sum)
+		left_sum = sum;
+}
+	sum = 0;
+	int right_sum = INT_MIN;
+	for (int i = m+1; i <= h; i++)
+	{
+sum = sum + arr[i];
+if (sum > right_sum)
+right_sum = sum;
+}
+return left_sum + right_sum;
+}
+int maxSubArraySum(int arr[], int l, int h)
+{
+	if (l == h)
+	return arr[l];
+
+	int m = (l + h)/2;
+
+	return max2(maxSubArraySum(arr, l, m), maxSubArraySum(arr, m+1, h), maxCrossingSum(arr, l, m, h));
+
+}
+
+int main()
+{
+	int arr[20],n,i;
+	printf("enter the number of elements\n");
+	scanf("%d",&n);
+	printf("enter the elements\n");
+	for(i=0;i< n;i++)
+	scanf("%d",&arr[i]);
+	int max_sum = maxSubArraySum(arr, 0, n-1);
+	printf("Maximum contiguous sum is %d\n", max_sum);
+getchar();
+	return 0;
+}
+output:enter the number of elements
+4
+enter the elements
+1 -2 -2 4
+Maximum contiguous sum is 4
+
                 </pre>
             </p>
             <h4>Question 2</h4>
             <p>
-                <p>Write a C program to find the sum of the first and last digit for the given number</p>
+                <p>QuickSort</p>
                 <pre>
-                    #include<stdio.h>
-                        int main() 
-                        { 
-                        int n, sum=0, firstDigit, lastDigit;
-                        printf("Enter number to find sum of first and last digit = ");
-                        scanf("%d", &n);
-                        lastDigit = n % 10;
-                        while(n >= 10) { n = n / 10;
-                        } 
-                        firstDigit = n ;
-                        sum = firstDigit + lastDigit;
-                        printf("Sum of first and last digit = %d", sum); 
-                        return 0;
+                    void quicksort(int a[50],int f, int l)
+                    {
+                        int i, j, pivot, t;
+                        if(f< l)
+                        {
+                            pivot=f;
+                            i=f;
+                            j=l;
+                            while(i< j)
+                            {
+                                while (a[i] < = a[pivot] && i< j)
+                                 i++;
+                                while(a[j]>a[pivot])
+                                 j--;
+                                if(i< j)
+                                {
+                                    t=a[i];
+                                    a[i]=a[j];
+                                    a[j]=t;
+                                }
+                                t=a[pivot];
+                                a[pivot]=a[j];
+                                a[j]=t;
+                            quicksort(a,f,j-1);
+                            quicksort(a,j+1,l);
+                            }
                         }
+                    }
+                    int main()
+                    {	
+                        int i,a[100];
+                        time_t t;
+                        srand((unsigned) time(&t));
+                        for(i=0;i< max;i++)
+                        a[i]=rand()%100;
+                        quicksort(a,0,max-1);
+                        for(i=0;i< max;i++)
+                        printf("%d\t",a[i]);
+                    } 
+                    
+                    
+                    Output:
+                    37      45      46      48      64      65      75      91      93      95
+                    
                 </pre>
             </p>
             <h4>Question 3</h4>
-            <p>Write a C program to check whether the given number is automorphic number or not.
-                An automorphic number is a number whose square ends with the number itself. For example, 5 is
-                an automorphic number as 5*5 =25. The last digit is 5 which is the same as the given number. It
-                has only positive single digit numbers. If it is an automorphic number display “Automorphic
-                Number” else display “Not Automorphic Number”. </p>
-            <p><pre>
-                #include<stdio.h>
-                    int main()
-                   {
-                    int a, sq;
-                    scanf("%d", &a);
-                    sq = a * a;
-                    sq = sq % 10;
-                    if(a==sq)
-                   printf("Automorphic Number");
-                   else
-                   printf("Not Automorphic Number");
-                   }
-            </pre></p>
-            <h4>Question 4</h4>
-            <p>Write a C program to find whether the given number is positive or negative</p>
-            <p><pre>
-                #include<stdio.h>
-                    int main()
-                    {
-                    int a;
-                    scanf("%d", &a);
-                     if(a>=0)
-                     printf("Positive");
-                     else
-                     printf("Negative");
-                    }
-            </pre></p>
-            <h4>Question 5</h4>
-            <p>Write a C program to find whether the given year is a leap year or noWrite a C program to find
-                <br> whether the given year is a leap year or noWrite a C program to find whether the given year is a leap year or no</p>
+            <p>matric chain</p>
             <p><pre>
                 #include <stdio.h>
-                    int main() 
-                    { 
-                     int year;
-                    printf("Enter a year: ");
-                     scanf("%d", &year);
-                     if (year % 400 == 0) 
-                     {
-                     printf("%d is a leap year.", year);
-                     }
-                     else if (year % 100 == 0) 
+                    #include <limits.h>
+                    
+                    int matchain(int p[], int n)
                     {
-                     printf("%d is not a leap year.", year);
-                     }
-                     else if (year % 4 == 0) 
-                    {
-                     printf("%d is a leap year.", year);
-                     }
-                     else 
-                    {
-                     printf("%d is not a leap year.", year);
-                     }
-                     return 0; 
+                        int m[n][n];
+                        int i,j,k,l,q;
+                        for (i=1;i< n;i++)
+                            m[i][i]=0;
+                            for(l=2;l< n;l++)
+                            {
+                                for(i=1;i< n-l+1; i++)
+                                {
+                                    
+                                    
+                                    
+                                    j=i+l-1;
+                                    m[i][j]=INT_MAX;
+                                    for(k=i;k<=j-1;k++)
+                                    {
+                                        q=m[i][k]+m[k+1][j]+p[i-1] *p[k]*p[j];
+                                        if(q< m[i][j])
+                                            m[i][j]=q;
+                                    }
+                                }
+                            }
+                        return m[1][n-1];
                     }
+                    
+                    int main(){
+                        int arr[]={5,4,6,2,7};\
+                        int size= sizeof(arr)/ sizeof(arr[0]);
+                        printf("min of the multiplication is %d", matchain(arr,size));
+                        getchar();
+                        return 0;
+                    
+                    }
+                    
+                    Output:
+                    min of the multiplication is 158
+                    
+            </pre></p>
+            <h4>Question 4</h4>
+            <p>lcs</p>            
+            <p><pre>
+                int max(int a , int b){
+                    if(a>b) return a;
+                    return b;
+                }
+                
+                void lcs(char*x, char* y, int m, int n)
+                {
+                    int i, index, j;
+                    int l[m+1][n+1];
+                    for(i=0; i<=m; i++)
+                    {
+                        for(j=0; j<=n; j++)
+                        {
+                            if(i==0 || j==0)
+                                l[i][j]=0;
+                            else if( x[i-1] == y[j-1])
+                                l[i][j] = l[i-1][j-1] + 1;
+                            else
+                                l[i][j] = max(l[i-1][j],l[i][j-1]);
+                        }
+                    }
+                    index=l[m][n];
+                    char lcs[index+1];
+                    lcs[index] ='\0';
+                    i=m; j=n;
+                    while(i>0 && j>0)
+                    {
+                        if(x[i-1]==y[j-1])
+                        {
+                            lcs[index-1] =x[i-1];
+                            i--;
+                            j--;
+                            index--;
+                        }
+                        else if(l[i-1][j]> l[i][j-1])
+                            i--;
+                        else
+                            j--;
+                    }
+                    printf("lcs of %s and %s is : %s", x,y,lcs);
+                }
+                
+                int main()
+                {
+                    int m, n;
+                    char x[20],y[20];
+                    printf("Enter string 1 : ");
+                    gets(x);
+                    printf("Enter the string 2 : ");
+                    gets(y);
+                    m=strlen(x);
+                    n= strlen(y);
+                    lcs(x,y,m,n);
+                    return 0;
+                }
+                output:Enter string 1 : a b c dEnter the string 2 : a e c b dlcs of a b c d and a e c b d is : a  c d
+            </pre></p>
+            <h4>Question 5</h4>
+            <p>knapsack</p>
+            <p><pre>
+                #include <stdio.h>
+ 
+                    int max(int a, int b) { return (a > b) ? a : b; }
+                     
+                    int knapSack(int W, int wt[], int val[], int n)
+                    {
+                        int i, w;
+                        int K[n + 1][W + 1];
+                     
+                        for (i = 0; i <= n; i++) {
+                            for (w = 0; w <= W; w++) {
+                                if (i == 0 || w == 0)
+                                    K[i][w] = 0;
+                                else if (wt[i - 1] <= w)
+                                    K[i][w] = max(val[i - 1]+ K[i - 1][w - wt[i - 1]], K[i - 1][w]);
+                                else
+                                    K[i][w] = K[i - 1][w];
+                            }
+                        }
+                     
+                        return K[n][W];
+                    }
+                    
+                    int main()
+                    {
+                        int profit[] = { 2,3,1,4 };
+                        int weight[] = { 3,4,6,5 };
+                        int W = 8;
+                        int n = sizeof(profit) / sizeof(profit[0]);
+                        printf("%d", knapSack(W, weight, profit, n));
+                        return 0;
+                    }
+                    
+                    Output:  
+                    6
+                    
             </pre></p>
             <h4>Question 6</h4>
             <p>Write a C program to display the ASCII value of vowels for both upper case and lower case
@@ -129,840 +280,640 @@
                 display the "ASCII value of the vowel". </p>
             <p><pre>
                 #include<stdio.h>
-                    int main()
+                    int a[10][10],n,visit[10];
+                    int cost_opt=0,cost_apr=0;
+                    int least_apr(int c);
+                    int least_opt(int c);
+                    
+                    void mincost_opt(int city)
                     {
-                    char c;
-                    scanf("%c", &c);
-                    if(c=='A'||c=='a'||c=='E'|| c=='e'|| c=='I'|| c=='i'|| c=='o'|| c=='O'|| c=='U' || c=='u')
-                    {
-                    printf("ASCII of %c is %d", c, c);
+                                int ncity;
+                                visit[city]=1;
+                                printf("%d-->",city);
+                                ncity=least_opt(city);
+                                if(ncity==999)
+                                {
+                                            ncity=1;
+                                            printf("%d",ncity);
+                                            cost_opt+=a[city][ncity];
+                                            return;
+                                }
+                                mincost_opt(ncity);
                     }
-                    else
-                    printf("Not vowel");
-                    }
+            int least_opt(int c)
+                {
+                int i,nc=999;
+                int min=999,kmin=999;
+                for(i=1;i<=n;i++)
+                {
+                                if((a[c][i]!=0)&&(visit[i]==0))
+                                if(a[c][i]< min)
+                                {
+                                                min=a[i][1]+a[c][i];
+                                                kmin=a[c][i];
+                                                nc=i;
+                                }
+                }
+                if(min!=999)
+                                cost_opt+=kmin;
+                return nc;
+            }
+
+            int main()
+            {
+                        int i,j;
+                        printf("Enter No. of cities:\n");
+                        scanf("%d",&n);
+            
+                        printf("Enter the cost matrix\n");
+                        for(i=1;i<=n;i++)
+                        {
+                                    printf("Enter elements of row:%d\n",i );
+                                    for(j=1;j<=n;j++)
+                                                scanf("%d",&a[i][j]);
+                                    visit[i]=0;
+                        }
+                        printf("The cost list is \n");
+                        for(i=1;i<=n;i++)
+                        {
+                                    printf("\n\n");
+                                    for(j=1;j<=n;j++)
+                                                printf("\t%d",a[i][j]);
+                        }
+                        printf("\n\n Optimal Solution :\n");
+                        printf("\n The path is :\n");
+                        mincost_opt(1);
+                        printf("\n Minimum cost:");
+                        printf("%d",cost_opt);
+            
+                        printf("\n\n Approximated Solution :\n");
+                        for(i=1;i<=n;i++)
+                                    visit[i]=0;
+                        printf("\n  The path is :\n");
+                        mincost_apr(1);
+                        printf("\nMinimum cost:");
+                        printf("%d",cost_apr);
+                        printf("\n\nError in approximation is approximated solution/optimal solution=%f",
+                                    (float)cost_apr/cost_opt);
+            }
+            
+            Output:
+            
+            Enter No. of cities:
+            4
+            Enter the cost matrix
+            Enter elements of row:1
+            0 1 3 6
+            Enter elements of row:2
+            1 0 2 3
+            Enter elements of row:3
+            3 2 0 1
+            Enter elements of row:4
+            6 3 1 0
+            The cost list is
+                    0       1       3       6
+            
+                    1       0       2       3
+            
+                    3       2       0       1
+            
+                    6       3       1       0
+            Optimal Solution :
+            
+             The path is :
+            1-->2-->4-->3-->1
+             Minimum cost:8
+            
+             Approximated Solution :
+            
+              The path is :
+            1-->2-->3-->4-->1
+            Minimum cost:10
+            error =1.25000
             </pre></p>
-            <h4>Question 7</h4>
-            <h5>Write a C program to generate the following series 6, 9, 14, 21, 30…</h5>
+            <h4>activity selection</h4>
             <p><pre>
                 #include<stdio.h>
-                    int main()
-                    {
-                     int x,n=5,i;
-                     printf("Enter n value\n");
-                     scanf("%d",&x);
-                     for(i=1;i<=x*2;i++)
-                     {
-                     if(i%2!=0)
-                     {
-                     n=n+i;
-                     printf("%d ",n) ; 
-                     }
-                     }
-                     return 0;
-                     }
-            </pre></p>
-            <h4>Question 8</h4>
-            <p>Write a C program to find the multiplication tables of a given number.
-                INPUT & OUTPUT FORMAT: Input consists of 2 integers. First input corresponds to the
-                number for which the multiplication tables have to be generated. Second input corresponds to the
-                number until which the tables need to be generated.</p>
-            <p><pre>
+                    
+int main() 
+{
+  int start[] = {1, 3, 2, 0, 5, 8, 11};
+  int finish[] = {3, 4, 5, 7, 9, 10, 12};
+  int n = sizeof(start) / sizeof(start[0]);
+   printf("The following activities are selected:\n");
+  int j = 0;
+  printf("%d ", j);
+  int i;
+  for (i = 1; i < n; i++)
+  {
+    if (start[i] >= finish[j])
+    {
+      printf("%d ", i);
+      j = i;
+    }
+  }
+  return 0;
+}
 
-                #include<stdio.h>
-                    int main()
-                    {
-                     int i,a,b;
-                     scanf("%d %d",&a,&b);
-                     for(i=1;i<=b;i++)
-                     {
-                     printf("%d * %d = %d\n",a,i,a*i);
-                     }
-                     return 0;
-                    }
-            </pre></p>
-            <h4>Question 9</h4>
-            <p>Write a C program to find the sum of first 'n' natural numbers by recursion</p>
-            <p><pre>
 
-                #include<stdio.h>
-                    int sum(int n)
-                    {
-                     if(n != 0)
-                    return n + sum(n - 1);
-                     else
-                     return 0;
-                    }
-                    int main()
-                    {
-                    int n,result;
-                    scanf("%d",&n);
-                     result=sum(n);
-                     printf("%d",result);
-                     return 0;
-                    }
+Output:
+
+The following activities are selected:
+0 1 4 6
 
             </pre></p>
-            <h4>
-                Part B
-            </h4>
-            <h4>Question1</h4>
-            <p>Write a C program to remove all the characters from the given string that are not alphabet</p>
+            <h4>multithread merge_sort</h4>
+          
             <p><pre>
+
                 #include <stdio.h>
-                    int main() {
-                     char line[150];
+                    #include <stdlib.h>
+                    #include <pthread.h>
                      
-                     printf("Enter a string: ");
-                     fgets(line, sizeof(line), stdin); 
-                     for (int i = 0, j; line[i] != '\0'; ++i) {
+                    #define MAX_SIZE 100
                      
-                     while (!(line[i] >= 'a' && line[i] <= 'z') && !(line[i] >= 'A' && line[i] <= 'Z') && 
-                    !(line[i] == '\0')) {
-                     for (j = i; line[j] != '\0'; ++j) {
+                    int arr[MAX_SIZE];
+                    int temp[MAX_SIZE];
                      
-                     line[j] = line[j + 1];
-                     }
-                     line[j] = '\0';
-                     }
-                     }
-                     printf("Output String: ");
-                    puts(line);
-                     return 0;
+                    void merge(int left, int mid, int right) {
+                       int i, j, k;
+                       for (i = left, j = mid + 1, k = left; i <= mid && j <= right; k++) {
+                           if (arr[i] <= arr[j])
+                               temp[k] = arr[i++];
+                           else
+                               temp[k] = arr[j++];
+                       }
+                       while (i <= mid)
+                           temp[k++] = arr[i++];
+                       while (j <= right)
+                           temp[k++] = arr[j++];
+                       for (i = left; i <= right; i++)
+                           arr[i] = temp[i];
                     }
+                     
+                    void* merge_sort(void* arg) {
+                       int* args = (int*)arg;
+                       int left = args[0];
+                       int right = args[1];
+                       if (left < right) {
+                           int mid = (left + right) / 2;
+                           int args1[2] = {left, mid};
+                           int args2[2] = {mid + 1, right};
+                           pthread_t tid1, tid2;
+                           pthread_create(&tid1, NULL, merge_sort, args1);
+                           pthread_create(&tid2, NULL, merge_sort, args2);
+                           pthread_join(tid1, NULL);
+                           pthread_join(tid2, NULL);
+                           merge(left, mid, right);
+                       }
+                       pthread_exit(NULL);
+                    }
+                     
+                    int main() {
+                       int n, i;
+                       printf("Enter the number of elements: ");
+                       scanf("%d", &n);
+                       printf("Enter the elements:\n");
+                       for (i = 0; i < n; i++)
+                           scanf("%d", &arr[i]);
+                     
+                       int args[2] = {0, n - 1};
+                       pthread_t tid;
+                       pthread_create(&tid, NULL, merge_sort, args);
+                       pthread_join(tid, NULL);
+                     
+                       printf("Sorted array:\n");
+                       for (i = 0; i < n; i++)
+                           printf("%d ", arr[i]);
+                       printf("\n");
+                     
+                       return 0;
+                    }
+
+                    output:-Enter the number of elements: 8
+                    Enter the elements:51347268 
+                    Sorted array:1 2 3 4 5 6 7 8
+                    
             </pre></p>
-            <h4>Question 2</h4>
+            <h4>naive string </h4>
+            <p><pre>
+
+                #include <stdio.h>
+                    #include <conio.h>
+                    #include <string.h>
+                    int main()
+                    {
+                        int i,j;
+                        char txt[] ="a b c d q a b b c x y z p q";
+                        char pat[] ="a b b c";
+                        int n =strlen(txt);
+                        int m =strlen(pat);
+                        for( i=0;i< n -m ;i++)
+                            {
+                                for( j=0; j< m ; j++)
+                                    if(txt[i+j]!= pat[j])
+                                    break;
+                                    if(j==m)
+                                        printf("match found in %d",i);
+                            }
+                        return 0;
+                    }
+                    
+                    output:match found in 10
+            </pre></p>
+           
+            <h4>kmp </h4>
             <p>
-                Write a C program to find the element of maximum value in each row
             </p>
             <p>
             <pre>
                 #include <stdio.h>
-                    int main()
-                    {
-                     int m,n; //Matrix Size Declaration
-                     printf("Enter the number of rows and column: \n");
-                     scanf("%d %d",&m,&n); //Matrix Size Initialization
-                     int arr[10][10]; //Matrix Size Declaration
-                     printf("\nEnter the elements of the matrix: \n");
-                     for(int i=0;i<m;i++) //Matrix Initialization
-                     {
-                     for(int j=0;j<n;j++)
-                     {
-                     scanf("%d",&arr[i][j]);
-                     }
-                     }
-                     printf("\nThe elements in the matrix are: \n");
-                     for(int i=0;i<m;i++) //Print the matrix
-                    {
-                     for(int j=0;j<n;j++)
-                     {
-                     printf("%d ",arr[i][j]);
-                     }
-                     printf("\n");
-                     }
-                     int i = 0, j;
-                     int max = 0;
-                     int res[m];
-                     while (i < m) //Check for the largest element in an array
-                     {
-                     for ( j = 0; j < n; j++)
-                     {
-                     if (arr[i][j] > max)
-                     {
-                     max = arr[i][j];
-                     }
-                     }
-                     res[i] = max;
-                     max = 0;
-                     i++;
-                     }
-                     for(int i = 0; i < n; i++) //Print the largest element in an array
-                    {
-                     printf("Largest element in row %d is %d \n", i, res[i]);
-                     }
+                    #include <string.h>
+                    #include <stdlib.h>
                      
-                     return 0;
-                    }
-            </pre></p>
-            <h4>Question 3</h4>
-            <p>Write a C program to remove the duplicate elements from an array. </p>
-         <p><pre>
-            #include <stdio.h>
-                #include <stdlib.h>
-                void removeDuplicate(int n, int *a)
-                
-                {
-                int i,j,temp,k;
-                for(i=0;i<=n;i++)
-                {
-                temp=(*(a+i));
-                for(j=i+1;j<=n;j++)
-                {
-                if(temp==(*(a+j)))
-                {
-                for(k=j;j<=n-1;k++)
-                {
-                (*(a+k))=(*(a+k+1));
-                }
-                n--;
-                }
-                }
-                }
-                for(i=0;i<=n;i++) 
-                printf("%d\n", (*(a+i)));
-                }
-                int main()
-                {
-                int n,i;
-                scanf("%d",&n); 
-                int*z=(int*)malloc(n*sizeof(int)); 
-                for(i=0;i<=n;i++) 
-                scanf("%d",(z+i)); 
-                removeDuplicate(n,z);
-                }
-            </pre>
-         </p>
-
-            <h4>Question 4</h4>
-            <p>Write a C program to convert a decimal number to a binary number by recursion</p>
-            <p><pre>
-                #include stdio.h
-                    #include <math.h>
-                    long long convert(int);
-                    int main() {
-                     int n, bin;
-                     printf("Enter a decimal number: ");
-                     scanf("%d", &n);
-                     bin = convert(n);
-                     printf("%d in decimal = %ld in binary", n, bin);
-                     return 0;
-                    }
-                    long long convert(int n) {
-                     long long bin = 0;
-                     int rem, i = 1;
-                    while (n!=0) {
-                     rem = n % 2;
-                     n /= 2;
-                     bin += rem * i;
-                     i *= 10;
-                     }
-                     return bin;
-                    }
-            </pre></p>
-            <h4>Question 5</h4>
-            <p>Write a C program to append elements at the end of the linked list.</p>
-            <p><pre>
-                #include<stdio.h>
-                    #include<stdlib.h>
-                    struct node
+                    // Function to implement the KMP algorithm
+                    void KMP(const char* text, const char* pattern, int m, int n)
                     {
-                      int data;
-                      struct node*next;
-                    };
-                    struct node*head;
-                    void append(int d)
-                    {
-                      struct node*newnode,*temp;
-                      temp=head;
-                      newnode=(struct node*)malloc(sizeof(struct node));
-                      newnode->data=d;
-                      newnode->next=NULL;
-                      if(head==NULL)
-                      {
-                        head=newnode;
-                      }else
-                      {
-                        while(temp->next!=NULL)
-                        {
-                          temp=temp->next;
+                        // base case 1: pattern is NULL or empty
+                        if (*pattern == '\0' || n == 0) {
+                            printf("The pattern found at index 0");
                         }
-                        temp->next=newnode;
-                      }
-                    }
-                    void display()
-                    {
-                      struct node*temp=head;
-                      while(temp!=NULL)
-                      {
-                        printf("%d ",temp->data);
-                        temp=temp->next;
-                      }
-                    }
-                    int main()
-                    {
-                      int d;
-                      do
-                      {
-                        scanf("%d",&d);
-                        if(d>0)
-                        {
-                          append(d);
+                     
+                        // base case 2: text is NULL, or text's length is less than that of pattern's
+                        if (*text == '\0' || n > m) {
+                            printf("Pattern not found");
                         }
-                      }while(d>-1);
-                        display();
-                      return 0;
-                    }
-            </pre></p>
-            <h4>Question 6</h4>
-            <p>Write a C program to count the number of elements present in a linked list.</p>
-            <p><pre>
-                #include<stdio.h>
-                    #include<stdlib.h>
-                    
-                    
-                    struct node
-                    {
-                    int data;
-                    struct node *link;
-                    };
-                    struct node *head;
-                    void append(int d)
-                    {
-                        struct node *temp,*newnode;
-                        temp=head;
-                        newnode=malloc(sizeof(struct node));
-                        newnode->data=d;
-                        newnode->link=NULL;
-                        if(head==NULL)
-                        {
-                            head=newnode;
+                     
+                        // next[i] stores the index of the next best partial match
+                        int next[n + 1];
+                     
+                        for (int i = 0; i < n + 1; i++) {
+                            next[i] = 0;
                         }
-                        else
+                     
+                        for (int i = 1; i < n; i++)
                         {
-                        while(temp->link!=NULL)
-                        {
-                            temp=temp->link;
-                        }
-                        temp->link=newnode;
-                        }
-                    }
-                    void display()
-                    {
-                        int count=0;
-                        struct node *temp=head;
-                        while(temp!=NULL)
-                        {
-                            count++;
-                            temp=temp->link;
-                        }
-                        printf("%d",count);
-                    }
-                    int main()
-                    {
-                        int d;
-                      do
-                      {
-                        scanf("%d",&d);
-                        if(d>0)
-                        {
-                          append(d);
-                        }
-                      }while(d>-1);
-                        display();
-                      return 0;
-                    }
-            </pre></p>
-            <h4>Question 7</h4>
-            <p>Write a C program to push the elements into the stack, pop out all the elements and also display the
-                elements in the stack (Implement this logic using stack using linked list).</p>
-            <p><pre>
-                #include <stdio.h>
-                    //#define CAPACITY 3
-                    int stack[100];
-                    int top=-1;
-                    void push(int ele,int n)
-                    {
-                        
-                        if(top==n-1)
-                        {
-                            printf("Stack is full\n");
-                        }
-                        else
-                        {
-                            top++;
-                            stack[top]=ele;
-                            
-                        }
-                    }
-                    void pop(int n)
-                    {
-                      
-                      int ele;
-                      if(top==-1)
-                      {
-                        printf("Stack is empty\n");
-                      }
-                      else
-                      {
-                        ele=stack[top];
-                        printf("The popped element is %d\n",ele);
-                        top--;
-                        
-                      }
-                    }
-                    void display(int n)
-                    {
-                      if(top==-1)
-                      {
-                        printf("The contents of the stack are {}\n");
-                      }
-                      else
-                      {
-                        printf("The contents of the stack are ");
-                        for(int i=0;i<=top;i++)
-                        {
-                          printf("%d ",stack[i]);
-                        }
-                        
-                      }
-                    }
-                          
-                    
-                    int main()
-                    {
-                      int n;
-                      printf("Enter the maximum size of the stack\n");
-                      scanf("%d",&n);
-                      int choice,ele;
-                      do
-                      {
-                        printf("Choice 1 : Push\nChoice 2 : Pop\nChoice 3 : Display\nAny other choice : Exit\n");
-                        printf("Enter your choice\n");
-                        scanf("%d",&choice);
-                        switch(choice)
-                        {
-                          case 1:
-                            printf("Enter the element to be pushed\n");
-                            scanf("%d",&ele);
-                            push(ele,n);
-                            break;
-                          case 2:
-                            pop(n);
-                            break;
-                          case 3:
-                            display(n);
-                            
-                            break;
-                            
-                        }
-                        printf("\nAny other choice : Exit\n");
-                      }while(choice!=4);
-                            
-                    
-                    }
-            </pre></p>
-            <h4>Question 8</h4>
-            <p>Write a C program to add the elements into a queue and print the elements in the queue
-                (Implement this logic using the queue using linked list)</p>
-            <p><pre>
-                #include <stdio.h>
-                    #include<stdlib.h>
-                    struct node
-                    {
-                        int data;
-                        struct node* next;
-                    };
-                    struct node *front=NULL;
-                    struct node *rear=NULL;
-                    int enque(int d)
-                    {
-                        struct node* new;
-                        new=(struct node*)malloc(sizeof(struct node));
-                        new->data=d;
-                        new->next=NULL;
-                        if((front==NULL)&&(rear==NULL))
-                        {
-                            front=rear=new;
-                        }
-                        else
-                        {
-                            rear->next=new;
-                            rear=new;
-                        }
-                        
-                    }
-                    void display()
-                    {
-                        printf("The contents of the queue are ");
-                        struct node *temp=front;
-                        if(temp==NULL)
-                        {
-                            printf("{}");
-                        }
-                        else
-                        {
-                            while(temp!=NULL)
-                            {
-                                printf("%d ",temp->data);
-                                temp=temp->next;
-                                
+                            int j = next[i];
+                     
+                            while (j > 0 && pattern[j] != pattern[i]) {
+                                j = next[j];
                             }
-                            
-                        }
-                        printf("\n");
-                    }
-                    
-                    int main()
-                    {
-                       int c,n;
-                        do{
-                            printf("Choice 1 : Enter element into Queue\nChoice 2 : Display\nAny other choice : Exit\nEnter your choice\n");
-                            scanf("%d",&c);
-                            switch(c)
-                            {
-                                case 1:
-                                      printf("Enter the element to be inserted/entered\n");
-                                       scanf("%d",&n);
-                                       enque(n);
-                                       break;
-                                case 2:display();
-                                       break;
+                     
+                            if (j > 0 || pattern[j] == pattern[i]) {
+                                next[i + 1] = j + 1;
                             }
-                        }while(c!=-1);
-                    }
-            </pre></p>
-            <h4>Question 9</h4>
-            <p>Write a program to obtain the adjacency matrix representation of a graph.</p>
-           <h4> Question 10</h4>
-           <p>Implement a C program to construct a Binary Search Tree and also display the elements in
-            the tree using Inorder, traversal. </p>
-            <p><pre>
-                #include <stdio.h>
-                    #include<stdlib.h>
-                    struct node
-                    {
-                        int data;
-                        struct node *left;
-                        struct node *right;
-                    };
-                    struct node *root=NULL;
-                    void insert(int d)
-                    {
-                        struct node *temp;
-                        temp=root;
-                        struct node *new;
-                        new=(struct node*)malloc(sizeof(struct node));
-                        new->data=d;
-                        new->left=NULL;
-                        new->right=NULL;
-                        if(root==NULL)
-                        {
-                            root=new;
                         }
-                        else
+                     
+                        for (int i = 0, j = 0; i < m; i++)
                         {
-                            while(1)
+                            if (*(text + i) == *(pattern + j))
                             {
-                                if(d<(temp->data))
-                                {
-                                    if(temp->left!=NULL)
-                                    {
-                                        temp=temp->left;
-                                    }
-                                    else
-                                    {
-                                        temp->left=new;
-                                        break;
-                                    }
+                                if (++j == n) {
+                                    printf("The pattern found at index %d\n", i - j + 1);
                                 }
-                                else
-                                {
-                                    if(temp->right!=NULL)
-                                    {
-                                        temp=temp->right;
-                                    }
-                                    else
-                                    {
-                                        temp->right=new;
-                                        break;
-                                    }
-                                }
-                                
                             }
-                        }
-                        
-                    }
-                    void inorder(struct node *temp)
-                    {
-                        if(temp==NULL)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            inorder(temp->left);
-                            printf("%d ",temp->data);
-                            inorder(temp->right);
-                        }
-                    }
-                    
-                    int main()
-                    {
-                        int d;
-                        do{
-                            printf("Enter a data:\n");
-                            scanf("%d",&d);
-                            if(d>0)
+                            else if (j > 0)
                             {
-                                insert(d);
+                                j = next[j];
+                                i--;    // since `i` will be incremented in the next iteration
                             }
-                        }while(d>0);
-                        printf("\nInorder: ");
-                        inorder(root);
+                        }
+                    }
+                     
+                    // Program to implement the KMP algorithm in C
+                    int main(void)
+                    {
+                        char* text = "ABCABAABCABAC";
+                        char* pattern = "CAB";
+                     
+                        int n = strlen(text);
+                        int m = strlen(pattern);
+                     
+                        KMP(text, pattern, n, m);
+                     
                         return 0;
                     }
+
+                    output:
+
+                    The pattern found at index 2
+                    The pattern found at index 8
+                                        
+            </pre></p>
+            
+        
+            
+            <h4>job sequence </h4>
+            
+            <p><pre>
+                #include <stdio.h>
+                    #define MAX 100
+                    
+                    typedef struct Job {
+                      char id[5];
+                      int deadline;
+                      int profit;
+                    } Job;
+                    
+                    void jobSequencingWithDeadline(Job jobs[], int n);
+                    
+                    int minValue(int x, int y) {
+                      if(x < y) return x;
+                      return y;
+                    }
+                    
+                    int main(void) {
+                      //variables
+                      int i, j;
+                    
+                      //jobs with deadline and profit
+                      Job jobs[5] = {
+                        {"j1", 2, 40},
+                        {"j2", 1, 50},
+                        {"j3", 3, 10},
+                        {"j4", 2, 30},
+                        {"j5", 1, 20},
+                      };
+                    
+                      //temp
+                      Job temp;
+                    
+                      //number of jobs
+                      int n = 5;
+                    
+                      //sort the jobs profit wise in descending order
+                      for(i = 1; i < n; i++) {
+                        for(j = 0; j < n - i; j++) {
+                          if(jobs[j+1].profit > jobs[j].profit) {
+                            temp = jobs[j+1];
+                            jobs[j+1] = jobs[j];
+                            jobs[j] = temp;
+                          }
+                        }
+                      }
+                    
+                      printf("%10s %10s %10s\n", "Job", "Deadline", "Profit");
+                      for(i = 0; i < n; i++) {
+                        printf("%10s %10i %10i\n", jobs[i].id, jobs[i].deadline, jobs[i].profit);
+                      }
+                    
+                      jobSequencingWithDeadline(jobs, n);
+                    
+                      return 0;
+                    }
+                    
+                    void jobSequencingWithDeadline(Job jobs[], int n) {
+                      //variables
+                      int i,j,k,maxprofit;
+                    
+                      //free time slots
+                      int timeslot[MAX];
+                    
+                      //filled time slots
+                      int filledTimeSlot = 0;
+                    
+                      //find max deadline value
+                      int dmax = 0;
+                      for(i = 0; i < n; i++) {
+                        if(jobs[i].deadline > dmax) {
+                          dmax = jobs[i].deadline;
+                        }
+                      }
+                    
+                      //free time slots initially set to -1 [-1 denotes EMPTY]
+                      for(i = 1; i <= dmax; i++) {
+                        timeslot[i] = -1;
+                      }
+                    
+                      printf("dmax: %d\n", dmax);
+                    
+                      for(i = 1; i <= n; i++) {
+                        k = minValue(dmax, jobs[i - 1].deadline);
+                        while(k >= 1) {
+                          if(timeslot[k] == -1) {
+                            timeslot[k] = i-1;
+                            filledTimeSlot++;
+                            break;
+                          }
+                          k--;
+                        }
+                    
+                        //if all time slots are filled then stop
+                        if(filledTimeSlot == dmax) {
+                          break;
+                        }
+                      }
+                    
+                      //required jobs
+                      printf("\nRequired Jobs: ");
+                      for(i = 1; i <= dmax; i++) {
+                        printf("%s", jobs[timeslot[i]].id);
+                    
+                        if(i < dmax) {
+                          printf(" --> ");
+                        }
+                      }
+                    
+                      //required profit
+                      maxprofit = 0;
+                      for(i = 1; i <= dmax; i++) {
+                        maxprofit += jobs[timeslot[i]].profit;
+                      }
+                      printf("\nMax Profit: %d\n", maxprofit);
+                    }
+                    
+                    
+                    Output:
+                          Job   Deadline     Profit
+                            j2          1         50
+                            j1          2         40
+                            j4          2         30
+                            j5          1         20
+                            j3          3         10
+                    dmax: 3
+                    
+                    Required Jobs: j2 --> j1 --> j3
+                    Max Profit: 100
+                    
+            </pre></p>
+            <h4>b-tree 9</h4>
+          
+            <p><pre>
+                #include <stdio.h>
+                    #include <stdlib.h>
+                    
+                    #define MAX 3
+                    #define MIN 2
+                    
+                    struct BTreeNode {
+                      int val[MAX + 1], count;
+                      struct BTreeNode *link[MAX + 1];
+                    };
+                    
+                    struct BTreeNode *root;
+                    
+                    // Create a node
+                    struct BTreeNode *createNode(int val, struct BTreeNode *child) {
+                      struct BTreeNode *newNode;
+                      newNode = (struct BTreeNode *)malloc(sizeof(struct BTreeNode));
+                      newNode->val[1] = val;
+                      newNode->count = 1;
+                      newNode->link[0] = root;
+                      newNode->link[1] = child;
+                      return newNode;
+                    }
+                    
+                    // Insert node
+                    void insertNode(int val, int pos, struct BTreeNode *node,struct BTreeNode *child) 
+                    {
+                      int j = node->count;
+                      while (j > pos) {
+                        node->val[j + 1] = node->val[j];
+                        node->link[j + 1] = node->link[j];
+                        j--;
+                      }
+                      node->val[j + 1] = val;
+                      node->link[j + 1] = child;
+                      node->count++;
+                    }
+                    
+                    // Split node
+                    void splitNode(int val, int *pval, int pos, struct BTreeNode *node,
+                             struct BTreeNode *child, struct BTreeNode **newNode) {
+                      int median, j;
+                    
+                      if (pos > MIN)
+                        median = MIN + 1;
+                      else
+                        median = MIN;
+                    
+                      *newNode = (struct BTreeNode *)malloc(sizeof(struct BTreeNode));
+                      j = median + 1;
+                      while (j <= MAX) {
+                        (*newNode)->val[j - median] = node->val[j];
+                        (*newNode)->link[j - median] = node->link[j];
+                        j++;
+                      }
+                      node->count = median;
+                      (*newNode)->count = MAX - median;
+                    
+                      if (pos <= MIN) {
+                        insertNode(val, pos, node, child);
+                      } else {
+                        insertNode(val, pos - median, *newNode, child);
+                      }
+                      *pval = node->val[node->count];
+                      (*newNode)->link[0] = node->link[node->count];
+                      node->count--;
+                    }
+                    
+                    // Set the value
+                    int setValue(int val, int *pval,struct BTreeNode *node, struct BTreeNode **child) {
+                      int pos;
+                      if (!node) {
+                        *pval = val;
+                        *child = NULL;
+                        return 1;
+                      }
+                    
+                      if (val < node->val[1]) {
+                        pos = 0;
+                      } else {
+                        for (pos = node->count;
+                           (val < node->val[pos] && pos > 1); pos--)
+                          ;
+                        if (val == node->val[pos]) {
+                          printf("Duplicates are not permitted\n");
+                          return 0;
+                        }
+                      }
+                      if (setValue(val, pval, node->link[pos], child)) {
+                        if (node->count < MAX) {
+                          insertNode(*pval, pos, node, *child);
+                        } else {
+                          splitNode(*pval, pval, pos, node, *child, child);
+                          return 1;
+                        }
+                      }
+                      return 0;
+                    }
+                    
+                    // Insert the value
+                    void insert(int val) {
+                      int flag, i;
+                      struct BTreeNode *child;
+                    
+                      flag = setValue(val, &i, root, &child);
+                      if (flag)
+                        root = createNode(i, child);
+                    }
+                    
+                    // Search node
+                    void search(int val, int *pos, struct BTreeNode *myNode) {
+                      if (!myNode) {
+                        return;
+                      }
+                    
+                      if (val < myNode->val[1]) {
+                        *pos = 0;
+                      } else {
+                        for (*pos = myNode->count;
+                           (val < myNode->val[*pos] && *pos > 1); (*pos)--)
+                          ;
+                        if (val == myNode->val[*pos]) {
+                          printf("%d is found", val);
+                          return;
+                        }
+                    else
+                          printf("%d is not found", val);
+                      }
+                      search(val, pos, myNode->link[*pos]);
+                    
+                      return;
+                    }
+                    
+                    // Traverse then nodes
+                    void traversal(struct BTreeNode *myNode) {
+                      int i;
+                      if (myNode) {
+                        for (i = 0; i < myNode->count; i++) {
+                          traversal(myNode->link[i]);
+                          printf("%d ", myNode->val[i + 1]);
+                        }
+                        traversal(myNode->link[i]);
+                      }
+                    }
+                    
+                    int main() {
+                      int  ch;
+                    
+                      insert(10);
+                      insert(34);
+                      insert(78);
+                      insert(45);
+                      insert(123);
+                      insert(341);
+                      insert(234);
+                      insert(167);
+                      insert(159);
+                      insert(52);
+                        insert(83);
+                    
+                      traversal(root);
+                    
+                      printf("\n");
+                      search(99, &ch, root);
+                    }
+                    
+                    
+                    Output:
+                    10 34 45 52 78 83 123 159 167 234 341
+                    99 is not found
+                    
             </pre></p>
 
 
         </div>
 </div>
-</body>
-</html> -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <p>
-            <pre>
-EXP1 - Determination of Entropy of given source <br>
-clc;
-clear all;
-i=input('Enter the no. of elements=);
-p=input('Enter probablities');
-sum=0;
-for n=1:1:i
- I=log2(1/p(n));
- H=sum+(p(n).*I);
- sum=H;
-end
-disp('H(x): ');
-disp(H);
-            </pre>
-        </p>
-        <pre>
-EXP2 - Generation and evaluation of a variable length source coding using Huffman coding <br>
-clc;clear;
-symbols=[1:7];
-p=input("enter the probblity of the symbols=")
-[QM,L,avglen,entr,eff]= huffmandict(symbols,p);
-disp(L,'number of bits used for the symbols");
-disp(QM,'code table');
-disp(avglen,'avrage length');
-disp(entr,'entropy');
-disp(eff,'efficency');
-        </pre>
-        <p>
-            <pre>
- EXP3 – determination of various Entropies and mutual information of Noise free channel <br>
-clc;
-clear;close;
-i=input('Enter no. of elements=');
-q=input('Enter joint probabilities matrix=');
-sum=0;
-//probability P(x)
-for n=1:1:i
-w=0;
-for m=1:1:i
-p(n)=w+q(n,m)
-w=p(n);
-end
-end
-disp('P(x):');
-disp(p);
-//entropy H(x)
-for n=1:i
-H=sum+(p(n)*log2(1/p(n)));
-sum=H;
-end
-disp('H(x): ');
-disp(H);
-//conditional probability matrix
-for n=1:1:i
-for m=1:1:i
-a(n,m)=q(n,m)/p(n);
-end
-end
-disp('P(Y/X):');
-disp(a);
-//entropy H(Y/X)
-d=0;
-for n=1:1:i
-for m=1:1:i
-if(a(n,m)>0)
-H1=d+(q(n,m)*log2(1/a(n,m)));
-d=H1
-end
-end
-end
-disp('H(Y/X):');
-disp(H1);
-//MI
-m=H-H1;
-disp('MI=');
-disp(m);
-// probability P(Y)
-for n=1:1:i
-w=0;
-for m=1:1:i
-s(n)=w+q(m,n);
-w=s(n);
-end
-end
-disp('P(Y):');
-disp(s);
-//entropy H(Y)
-k=0;
-for n=1:1:i
-H2=k+(s(n)*log2(1/s(n)));
-k=H2;
-end
-disp('H(Y): ');
-disp(H2)
-            </pre>
-        </p>
-        <p><pre>
-EXP4 – Determination of various Entropies and mutual information of given BSC Channel <br>
-clc;
-clear;
-close;
-i=input('Enter no. of elements=');
-p=input('Enter probability=');
-q=input('Enter conditional probabilities matrix=');
-sum=0;
-// entropy H(x)
-for n=1:1:i
- if p(n) > 0
- H=sum+(p(n)*log2(1/p(n)));
- end
-sum=H;
-end
-disp('H(x): ');
-disp(H);
-//Joint probability matrix
-for n=1:1:i
- for m=1:1:i
- a(n,m)=q(n,m)*p(n);
- end
-end
-disp('P(X,Y):');
-disp(a);
-// entropy H(Y/X)
-d=0;
-H1=0;
-for n=1:1:i
- for m=1:1:i
- if q(n,m) > 0
- H1=d+(a(n,m)*log2(1/q(n,m)));
- end
-d=H1;
-end
-end
-disp('H(Y/X):');
-disp(H1);
-// probability P(Y)
-for n=1:1:i
- w=0;
- for m=1:1:i
- s(n)=w+a(m,n);
- w=s(n);
- end
-end
-disp('P(Y):');
-disp(s);
-//entropy H(Y)
-k=0;
-for n=1:1:i
- if s(n) > 0
- H2=k+(s(n)*log2(1/s(n)));
- end
-k=H2;
-end
-disp('H(Y): ');
-disp(H2);
-//Find Mutual Information
-m=H2-H1;
-disp('MI=');
-disp(m);
-// entropy H(Y,X)
-d=0;
-H3 = 0;
-for n=1:1:i
- for m=1:1:i
- if a(n,m) > 0
- H3=d+(a(n,m)*log2(1/a(n,m)));
- end
-d=H3;
- end
-end
-disp('H(Y,X):');
-disp(H3);
-        </pre></p>
-        <p><pre>
- EXP5 – Generate a codeword using linear block code and decoding of the Received vector using Syndrome <br>
-clc;
-clear;
-k = 4;
-n = 7;
-P = [1 1 1;1 1 0;1 0 1;0 1 1]
-disp(P,'Parity Matrix P')
-H=[P;eye(n-k,n-k)]'
-disp(H,'Parity Check Matrix H')
-R=input("Enter the n bit received code vector:")
-S=R*H'
-S = modulo(S,2);
-disp(S,'Syndrome Matrix R*H(transpose)')
-if S==[0 0 0] then
-disp(R,'Received Code without error')
-disp(R(1:4),'Received Information Message')
-else
-ErrPos=1
-d=[H(:,ErrPos)]'
-disp('d is')
-disp(d)
-while ((d(1)<>S(1))|(d(2)<>S(2))|(d(3)<>S(3))) do
-ErrPos=ErrPos+1
-d=[H(:,ErrPos)]'
-end
-disp(ErrPos,'Erroneous Bit Position')
-if R(ErrPos)==0 then
-R(ErrPos)=1
-disp(R,'Received Code with error corrected')
-disp(R(1:4),'Received Information Message')
-else
-R(ErrPos)=0
-disp(R,'Received Code with error corrected')
-disp(R(1:4),'Received Information Message')
-end
-end
-        </pre></p>
-        <p><pre>
-EXP6 – Realize the convolutional code for given generator Sequence <br>
-clc;clear;
-g1 = input('Enter the input Top Adder Sequence:=')
-g2 =input('Enter the input bottom Adder Sequence:=')
-//g3 = input('Enter the input Adder Sequence:=')
-m = input('Enter the message sequence:=')
-x1 = round(convol(g1,m));
-x2 = round(convol(g2,m));
-//x3 = round(convol(g3,m));
-x1 = modulo(x1,2);
-x2 = modulo(x2,2);
-//x3 = modulo(x3,2);
-N = length(x1);
-disp(N);
-for i =1:length(x1)
-x(i,:)=[x1(i),x2(i)];//,x3(N-i+1)];
-end
-x = string(x);
-disp(x)
-        </pre></p>
-    </div>
-</body>
-</html>
+</body> 
+</html> 
