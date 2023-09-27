@@ -14,64 +14,23 @@
             <p>Design and analyze a divide and conquer algorithm for following maximum subarray sum problem, given an array of integers find a sub-array [a contagious portion of the array] which gives the maximum sum
             </p>
             <p><pre>
-                #include <stdio.h>
-    #include <limits.h>
-
-    int max1(int a, int b) 
-    { 
-	return (a > b)? a : b; 
-}
-
-int max2(int a, int b, int c) 
-{ 
-	return max1(max1(a, b), c); 
-}
-
-int maxCrossingSum(int arr[], int l, int m, int h)
-{
-	int sum = 0;
-	int left_sum = INT_MIN;
-	for (int i = m; i >= l; i--)
-	{
-		sum = sum + arr[i];
-		if (sum > left_sum)
-		left_sum = sum;
-}
-	sum = 0;
-	int right_sum = INT_MIN;
-	for (int i = m+1; i <= h; i++)
-	{
-sum = sum + arr[i];
-if (sum > right_sum)
-right_sum = sum;
-}
-return left_sum + right_sum;
-}
-int maxSubArraySum(int arr[], int l, int h)
-{
-	if (l == h)
-	return arr[l];
-
-	int m = (l + h)/2;
-
-	return max2(maxSubArraySum(arr, l, m), maxSubArraySum(arr, m+1, h), maxCrossingSum(arr, l, m, h));
-
-}
-
-int main()
-{
-	int arr[20],n,i;
-	printf("enter the number of elements\n");
-	scanf("%d",&n);
-	printf("enter the elements\n");
-	for(i=0;i< n;i++)
-	scanf("%d",&arr[i]);
-	int max_sum = maxSubArraySum(arr, 0, n-1);
-	printf("Maximum contiguous sum is %d\n", max_sum);
-getchar();
-	return 0;
-}
-output:enter the number of elements
+               import numpy as np
+import pandas as pd
+# import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+# Load the IRIS dataset
+iris = load_iris()
+data = iris.data
+target = iris.target
+target_names = iris.target_names
+# Create a DataFrame for better visualization
+df = pd.DataFrame(data, columns=iris.feature_names)
+df['target'] = target
+df['target_names'] = [target_names[i] for i in target]
+# Calculate the distribution of data for each class
+class_distribution = df['target_names'].value_counts()
+print("Distribution of data in the IRIS dataset:")
+print(class_distribution)
 4
 enter the elements
 1 -2 -2 4
