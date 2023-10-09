@@ -2,355 +2,431 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
     <div>
-        <div>
-            <h2>            part A            </h2>
-            <h4>Question 1</h4>
-            <p>Design and analyze a divide and conquer algorithm for following maximum subarray sum problem, given an array of integers find a sub-array [a contagious portion of the array] which gives the maximum sum
-            </p>
-            <p><pre>
-               import numpy as np
-import pandas as pd
-# import matplotlib.pyplot as plt
-from sklearn.datasets import load_iris
-# Load the IRIS dataset
-iris = load_iris()
-data = iris.data
-target = iris.target
-target_names = iris.target_names
-# Create a DataFrame for better visualization
-df = pd.DataFrame(data, columns=iris.feature_names)
-df['target'] = target
-df['target_names'] = [target_names[i] for i in target]
-# Calculate the distribution of data for each class
-class_distribution = df['target_names'].value_counts()
-print("Distribution of data in the IRIS dataset:")
-print(class_distribution)
+        <pre>
+        # Program 1
 
-Plot the distribution
-plt.figure(figsize=(8, 6))
-class_distribution.plot(kind='bar', color='skyblue')
-plt.title('Distribution of Data in the IRIS Dataset')
-plt.xlabel('Species')
-plt.ylabel('Count')
-plt.xticks(rotation=0)
-plt.show()
-
-
-
-
-
-                </pre>
-            </p>
-<h4>Question 2</h4>
-<p>
-    <p>3</p>
-    <pre>
-import numpy as np
-from scipy import stats
-
-# Define the distributions
-distributions = {
-    'Gaussian': stats.norm,
-    'Rayleigh': stats.rayleigh,
-    'Exponential': stats.expon,
-    'Gamma': stats.gamma
-}
-
-# Define the parameters for each distribution
-params = {
-    'Gaussian': (30, 1.4),
-    'Rayleigh': (1.5,),
-    'Exponential': (0.9,),
-    'Gamma': (4.4, 0, 1)
-}
-
-# Define the test data
-test_data = [(30, 1.4, 0.9), (4.1, 1.5, 1.1), (20, 40, 0.9), (4.4, 1, 2)]
-
-# Classify the test data based on maximum likelihood
-for data_point in test_data:
-    max_likelihood = -1
-    predicted_distribution = None
-    
-    for distribution_name, distribution in distributions.items():
-        params_for_distribution = params[distribution_name]
-        likelihood = np.prod(distribution.pdf(data_point, *params_for_distribution))
+        import pandas as pd
+        from sklearn.datasets import load_iris
+        iris = load_iris()
+        data = iris.data
+        target = iris.target
+        target_names = iris.target_names
+        df = pd.DataFrame(data, columns=iris.feature_names)
+        df['target'] = target
+        df['target_names'] = [target_names[i] for i in target]
+        class_distribution = df['target_names'].value_counts()
+        print("Distribution of data in the IRIS dataset:")
+        print(class_distribution)
         
-        if likelihood > max_likelihood:
-            max_likelihood = likelihood
-            predicted_distribution = distribution_name
+        
+        output:
+        
+        Distribution of data in the IRIS dataset:
+        target_names
+        setosa 50
+        versicolor 50
+        virginica 50
+        Name: count, dtype: int64
+        
+--------------------------------------------------------------------------------------------        
+        # program 2
+        
+        import numpy as np
+        import pandas as pd
+        import matplotlib.pyplot as plt
+        from sklearn.datasets import load_iris
+        iris = load_iris()
+        data = iris.data
+        target = iris.target
+        target_names = iris.target_names
+        df = pd.DataFrame(data, columns=iris.feature_names)
+        df['target'] = target
+        df['target_names'] = [target_names[i] for i in target]
+        class_distribution = df['target_names'].value_counts()
+        print("Distribution of data in the IRIS dataset:")
+        print(class_distribution)
+        plt.figure(figsize=(8, 6))
+        class_distribution.plot(kind='bar', color='skyblue')
+        plt.title('Distribution of Data in the IRIS Dataset')
+        plt.xlabel('Species')
+        plt.ylabel('Count')
+        plt.xticks(rotation=0)
+        plt.show()
+        
+--------------------------------------------------------------------------------------------        
+
+        # Program 3
+        
+        import numpy as np
+        from scipy import stats
+        
+        distributions = {
+            'Gaussian': stats.norm,
+            'Rayleigh': stats.rayleigh,
+            'Exponential': stats.expon,
+            'Gamma': stats.gamma
+        }
+        
+        params = {
+            'Gaussian': (30, 1.4),
+            'Rayleigh': (1.5,),
+            'Exponential': (0.9,),
+            'Gamma': (4.4, 0, 1)
+        }
+        
+        test_data = [(30, 1.4, 0.9), (4.1, 1.5, 1.1), (20, 40, 0.9), (4.4, 1, 2)]
+        
+        for data_point in test_data:
+            max_likelihood = -1
+            predicted_distribution = None
+            
+            for distribution_name, distribution in distributions.items():
+                params_for_distribution = params[distribution_name]
+                likelihood = np.prod(distribution.pdf(data_point, *params_for_distribution))
+                
+                if likelihood > max_likelihood:
+                    max_likelihood = likelihood
+                    predicted_distribution = distribution_name
+            
+            print(f"Test Data Point: {data_point} --> Predicted Distribution: {predicted_distribution}")
+        
+        output:
+        
+        Test Data Point: (30, 1.4, 0.9) --> Predicted Distribution: Gamma
+        Test Data Point: (4.1, 1.5, 1.1) --> Predicted Distribution: Exponential
+        Test Data Point: (20, 40, 0.9) --> Predicted Distribution: Gamma 
+        Test Data Point: (4.4, 1, 2) --> Predicted Distribution: Exponential
+        
+        --------------------------------------------------------------------------------------------        
+        
+        
+        # Program 4
+        
+        
+        import numpy as np
+        import pandas as pd
+        
+        np.random.seed(0)
+        num_samples = 20
+        
+        books = np.random.normal(loc=20, scale=5, size=num_samples)
+        matchboxes = np.random.normal(loc=5, scale=1, size=num_samples)
+        pencils = np.random.normal(loc=15, scale=3, size=num_samples)
+        diamond_sweets = np.random.normal(loc=10, scale=2, size=num_samples)
+        data = pd.DataFrame({
+            'Books': books,
+            'Matchboxes': matchboxes,
+            'Pencils': pencils,
+            'Diamond Sweets': diamond_sweets
+        })
+        
+        pd.set_option('display.max_columns', None)
+        print(data)
+        
+        --------------------------------------------------------------------------------------------        
+        
+        # Program 5
+        
+        import numpy as np
+        import pandas as pd
+        from sklearn.datasets import load_iris
+        from scipy.stats import norm
+        
+        iris = load_iris()
+        data = iris.data
+        target = iris.target
+        target_names = iris.target_names
+        
+        df = pd.DataFrame(data, columns=iris.feature_names)
+        df['target'] = target
+        df['target_names'] = [target_names[i] for i in target]
+        
+        class_mle = {}
+        for class_name in target_names:
+         class_data = df[df['target_names'] == class_name].iloc[:, :-2]
+         class_mean = class_data.mean()
+         class_variance = class_data.var()
+         class_mle[class_name] = (class_mean, class_variance)
+        
+        for class_name, (class_mean, class_variance) in class_mle.items():
+         print(f"Class: {class_name}")
+         for feature, mean, variance in zip(iris.feature_names, class_mean, class_variance):
+            print(f"Feature: {feature}, Mean: {mean:.2f}, Variance: {variance:.2f}")
+         print("=" * 30)
+        
+        
+        
+        Output:
+        Class: setosa
+        Feature: sepal length (cm), Mean: 5.01, Variance: 0.12
+        Feature: sepal width (cm), Mean: 3.43, Variance: 0.14
+        Feature: petal length (cm), Mean: 1.46, Variance: 0.03
+        Feature: petal width (cm), Mean: 0.25, Variance: 0.01
+        ==============================
+        Class: versicolor
+        Feature: sepal length (cm), Mean: 5.94, Variance: 0.27
+        Feature: sepal width (cm), Mean: 2.77, Variance: 0.10
+        Feature: petal length (cm), Mean: 4.26, Variance: 0.22
+        Feature: petal width (cm), Mean: 1.33, Variance: 0.04
+        ==============================
+        Class: virginica
+        Feature: sepal length (cm), Mean: 6.59, Variance: 0.40
+        Feature: sepal width (cm), Mean: 2.97, Variance: 0.10
+        Feature: petal length (cm), Mean: 5.55, Variance: 0.30
+        Feature: petal width (cm), Mean: 2.03, Variance: 0.08
+      
+        --------------------------------------------------------------------------------------------        
+
+        # Program 6
+        
+        import numpy as np
+        from scipy.stats import norm
+        
+        item_distributions = {
+         'Book': {'Height': (10, 2), 'Width': (20, 3)},
+         'Matchbox': {'Height': (5, 1), 'Width': (3, 0.5)},
+         'Pencil': {'Length': (15, 2), 'Diameter': (0.7, 0.1)},
+         'Sweet (Diamond)': {'Length': (2, 0.5), 'Width': (2, 0.5)}
+        }
+        input_data = [(25, 1.4, 0.9), (5.8, 1.7, 1.1), (18, 35, 0.9), (5, 1.1, 1.8)]
+        
+        def classify_input_data(data_point):
+         max_likelihood = -1
+         predicted_item = None
+         for item, params in item_distributions.items():
+            likelihood = 1.0
+            for attribute, (param_mean, param_std) in params.items():
+                idx = list(params.keys()).index(attribute)
+                value = data_point[idx]
+                likelihood *= norm.pdf(value, loc=param_mean, scale=param_std)
+            if likelihood > max_likelihood:
+                max_likelihood = likelihood
+                predicted_item = item
+         return predicted_item
+        
+        for i, data_point in enumerate(input_data):
+            predicted_item = classify_input_data(data_point)
+            print(f"Data point {i + 1} is classified as: {predicted_item}")
+        
+        Output:
+        Data point 1 is classified as: Pencil
+        Data point 2 is classified as: Matchbox
+        Data point 3 is classified as: Book
+        Data point 4 is classified as: Matchbox
+        
+        --------------------------------------------------------------------------------------------        
+
+        # Program 7
+        
+        import numpy as np
+        import tensorflow as tf
+        from sklearn.datasets import load_iris
+        from sklearn.model_selection import train_test_split
+        from sklearn.preprocessing import StandardScaler
+        from tensorflow.keras.models import Sequential
+        from tensorflow.keras.layers import Dense, Dropout
+        import matplotlib.pyplot as plt
+        from tensorflow.keras.optimizers import Adam
+        
+        iris = load_iris()
+        X, y = iris.data, iris.target
+        
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        
+        scaler = StandardScaler()
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
+        
+        model = Sequential()
+        model.add(Dense(64, activation='relu'))
+        model.add(Dropout(0.2))
+        model.add(Dense(32, activation='relu'))
+        model.add(Dense(3, activation='softmax'))
+        model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+        
+        X_train_partial, X_val, y_train_partial, y_val = train_test_split(X_train, y_train, test_size=0.1, random_state=42)
+        
+        history = model.fit(X_train_partial, y_train_partial, epochs=50, batch_size=16, validation_data=(X_val, y_val), verbose=2)
+        
+        test_loss, test_accuracy = model.evaluate(X_test, y_test, verbose=2)
+        print(f'Test accuracy: {test_accuracy * 100:.2f}%')
+        
+        output
+        Test accuracy: 96.67%
+        Test loss: 0.1254655420780182
+        Test accuracy: 0.9666666388511658
+
+        --------------------------------------------------------------------------------------------        
     
-    print(f"Test Data Point: {data_point} --> Predicted Distribution: {predicted_distribution}")
+        # Program 8
+        
+        
+        import numpy as np
+        import tensorflow as tf
+        from sklearn.datasets import load_iris
+        from sklearn.model_selection import train_test_split
+        from sklearn.preprocessing import StandardScaler
+        from tensorflow.keras.models import Sequential
+        from tensorflow.keras.layers import Dense, Dropout
+        import matplotlib.pyplot as plt
+        from tensorflow.keras.optimizers import Adam
+        
+        iris = load_iris()
+        X, y = iris.data, iris.target
+        
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        
+        scaler = StandardScaler()
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
+        
+        model = Sequential()
+        model.add(Dense(64, activation='relu'))
+        model.add(Dropout(0.2))
+        model.add(Dense(32, activation='relu'))
+        model.add(Dense(3, activation='softmax'))
+        model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+        
+        X_train_partial, X_val, y_train_partial, y_val = train_test_split(X_train, y_train, test_size=0.1, random_state=42)
+        
+        history = model.fit(X_train_partial, y_train_partial, epochs=50, batch_size=16, validation_data=(X_val, y_val), verbose=2)
+        
+        test_loss, test_accuracy = model.evaluate(X_test, y_test, verbose=2)
+        print(f'Test accuracy: {test_accuracy * 100:.2f}%')
+        print(f'Test loss: {test_loss *100 :.2f}%')
+        
+        y_pred = model.predict(X_test)
+        y_pred_classes = np.argmax(y_pred, axis=1)
+        accuracy = np.mean(y_pred_classes == y_test)
+        print(f"Classification Accuracy on Test Data: {accuracy * 100:.2f}%")
+        
+        plt.plot(history.history['accuracy'])
+        plt.plot(history.history['val_accuracy'])
+        plt.title('Model accuracy')
+        plt.ylabel('Accuracy')
+        plt.xlabel('Epoch')
+        plt.legend(['Train', 'Validation'], loc='upper left')
+        plt.show()
+        
+        plt.plot(history.history['loss'])
+        plt.plot(history.history['val_loss'])
+        plt.title('Model loss')
+        plt.ylabel('Loss')
+        plt.xlabel('Epoch')
+        plt.legend(['Train', 'Validation'], loc='upper left')
+        plt.show()
+        
+        
+        
+        output
+        Test accuracy: 96.67%
+        Test loss: 0.1254655420780182
+        Test accuracy: 0.9666666388511658
+        Classification Accuracy on Test Data: 96.67%
+    
+        --------------------------------------------------------------------------------------------        
+
+        # Program 9
+        
+        
+        import numpy as np
+        import tensorflow as tf
+        from sklearn.datasets import load_iris
+        from sklearn.model_selection import train_test_split
+        from sklearn.preprocessing import StandardScaler
+        from tensorflow.keras.models import Sequential
+        from tensorflow.keras.layers import Dense, Dropout
+        import matplotlib.pyplot as plt
+        from tensorflow.keras.optimizers import Adam
+        
+        iris = load_iris()
+        X, y = iris.data, iris.target
+        
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        
+        scaler = StandardScaler()
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
+        
+        model = Sequential()
+        model.add(Dense(128, activation='tanh'))
+        model.add(Dropout(0.2))
+        model.add(Dense(64, activation='tanh'))
+        model.add(Dense(3, activation='softmax'))
+        model.compile(optimizer='adagrad', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+        
+        X_train_partial, X_val, y_train_partial, y_val = train_test_split(X_train, y_train, test_size=0.1, random_state=42)
+        
+        history = model.fit(X_train_partial, y_train_partial, epochs=50, batch_size=16, validation_data=(X_val, y_val), verbose=2)
+        
+        test_loss, test_accuracy = model.evaluate(X_test, y_test, verbose=2)
+        print(f'Test accuracy: {test_accuracy * 100:.2f}%')
+        print(f'Test loss: {test_loss *100 :.2f}%')
+        
+        y_pred = model.predict(X_test)
+        y_pred_classes = np.argmax(y_pred, axis=1)
+        accuracy = np.mean(y_pred_classes == y_test)
+        print(f"Classification Accuracy on Test Data: {accuracy * 100:.2f}%")
+        
+        --------------------------------------------------------------------------------------------        
+     
+        # Program 10
+        
+        import numpy as np
+        import tensorflow as tf
+        from sklearn.datasets import load_iris
+        from sklearn.model_selection import train_test_split
+        from sklearn.preprocessing import StandardScaler
+        from tensorflow.keras.models import Sequential
+        from tensorflow.keras.layers import Conv1D, MaxPooling1D, Flatten, Dense, Dropout
+        import matplotlib.pyplot as plt
+        import time
+        
+        iris = load_iris()
+        X, y = iris.data, iris.target
+        
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        
+        scaler = StandardScaler()
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
+        
+        X_train = X_train.reshape(-1, X_train.shape[1], 1)
+        X_test = X_test.reshape(-1, X_test.shape[1], 1)
+        
+        model = Sequential()
+        model.add(Conv1D(64, kernel_size=3, activation='relu', input_shape=(X_train.shape[1], 1)))
+        model.add(MaxPooling1D(pool_size=2))
+        model.add(Flatten())
+        model.add(Dense(32, activation='relu'))
+        model.add(Dense(3, activation='softmax'))
+        model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+        
+        start_time = time.time()
+        
+        history = model.fit(X_train, y_train, epochs=150, batch_size=32,validation_data=(X_test, y_test), verbose=2)
+        
+        training_time = time.time() - start_time
+        test_loss, test_accuracy = model.evaluate(X_test, y_test, verbose=2)
+        
+        y_pred = model.predict(X_test)
+        y_pred_classes = np.argmax(y_pred, axis=1)
+        accuracy = np.mean(y_pred_classes == y_test)
+        print(f"Classification Accuracy on Test Data: {accuracy * 100:.2f}%")
+        print(f'Test accuracy: {test_accuracy * 100:.2f}%')
+        print(f"Training Time: {training_time:.2f} seconds")
+        
+        Output:
+        Training Time: 5.84 seconds
+        Test Loss: 0.3077
+        Test Accuracy: 100.00%
     </pre>
-</p>
-            <h4>Question 4</h4>
-            <p>matric chain</p>
-            <p><pre>
-#mport numpy as np
-import pandas as pd
-
-# Set a random seed for reproducibility
-np.random.seed(0)
-
-# Define the number of samples for each item
-num_samples = 20
-
-# Generate data for each item with statistical variations
-books = np.random.normal(loc=20, scale=5, size=num_samples)
-matchboxes = np.random.normal(loc=5, scale=1, size=num_samples)
-pencils = np.random.normal(loc=15, scale=3, size=num_samples)
-diamond_sweets = np.random.normal(loc=10, scale=2, size=num_samples)
-
-# Create a DataFrame to store the dataset
-data = pd.DataFrame({
-    'Books': books,
-    'Matchboxes': matchboxes,
-    'Pencils': pencils,
-    'Diamond Sweets': diamond_sweets
-})
-
-# Display all rows and columns of the dataset
-pd.set_option('display.max_columns', None)
-print(data)
-            </pre></p>
-            <h4>Question 6</h4>
-            <p>lcs</p>            
-            <p><pre>
-import numpy as np
-from scipy.stats import norm
-# Define the parameters for the distributions of each item
-item_distributions = {
- 'Book': {'Height': (10, 2), 'Width': (20, 3)},
- 'Matchbox': {'Height': (5, 1), 'Width': (3, 0.5)},
- 'Pencil': {'Length': (15, 2), 'Diameter': (0.7, 0.1)},
- 'Sweet (Diamond)': {'Length': (2, 0.5), 'Width': (2, 0.5)}
-}
-# Input data
-input_data = [(25, 1.4, 0.9), (5.8, 1.7, 1.1), (18, 35, 0.9), (5, 1.1, 1.8)]
-# Define a function to classify input data
-def classify_input_data(data_point):
- max_likelihood = -1
- predicted_item = None
- for item, params in item_distributions.items():
-    likelihood = 1.0
-    for attribute, (param_mean, param_std) in params.items():
-        idx = list(params.keys()).index(attribute)
-        value = data_point[idx]
-        likelihood *= norm.pdf(value, loc=param_mean, scale=param_std)
-    if likelihood > max_likelihood:
-        max_likelihood = likelihood
-        predicted_item = item
- return predicted_item
-# Classify input data
-for i, data_point in enumerate(input_data):
-    predicted_item = classify_input_data(data_point)
-    print(f"Data point {i + 1} is classified as: {predicted_item}")
-                    
-            </pre></p>
-            <h4>Question 5</h4>
-            <p>TSP</p>
-            <p><pre>
-#import numpy as np
-import pandas as pd
-from sklearn.datasets import load_iris
-from scipy.stats import norm
-# Load the IRIS dataset
-iris = load_iris()
-data = iris.data
-target = iris.target
-target_names = iris.target_names
-# Create a DataFrame for better visualization
-df = pd.DataFrame(data, columns=iris.feature_names)
-df['target'] = target
-df['target_names'] = [target_names[i] for i in target]
-# Calculate the Maximum Likelihood Estimate (MLE) for each class
-class_mle = {}
-for class_name in target_names:
- class_data = df[df['target_names'] == class_name].iloc[:, :-2]
- class_mean = class_data.mean()
- class_variance = class_data.var()
- class_mle[class_name] = (class_mean, class_variance)
-# Print the MLE for each class
-for class_name, (class_mean, class_variance) in class_mle.items():
- print(f"Class: {class_name}")
- for feature, mean, variance in zip(iris.feature_names, class_mean, class_variance):
-    print(f"Feature: {feature}, Mean: {mean:.2f}, Variance: {variance:.2f}")
- print("=" * 30)
-</pre></p>
-<h4>7</h4>
-<p><pre>
-import numpy as np
-import tensorflow as tf
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout
-import matplotlib.pyplot as plt
-from tensorflow.keras.optimizers import Adam
-
-# Load the Iris dataset
-iris = load_iris()
-X, y = iris.data, iris.target
-
-# Split the data into training (80%) and testing (20%)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Standardize the feature data
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
-model = Sequential()
-
-# Input layer with ReLU activation
-model.add(Dense(64, activation='relu'))
-
-# Dropout layer to prevent overfitting
-model.add(Dropout(0.2))
-
-# Hidden layer with ReLU activation
-model.add(Dense(32, activation='relu'))
-
-# Output layer with softmax activation (3 classes in Iris dataset)
-model.add(Dense(3, activation='softmax'))
-
-# Compile the model
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-# Split the data into training (80%) and validation (10%)
-X_train_partial, X_val, y_train_partial, y_val = train_test_split(X_train, y_train, test_size=0.5, random_state=42)
-
-# Train the model
-history = model.fit(X_train_partial, y_train_partial, epochs=50, batch_size=16, validation_data=(X_val, y_val), verbose=2)
-# Evaluate the model on the testing set
-test_loss, test_accuracy = model.evaluate(X_test, y_test, verbose=2)
-print(f'Test accuracy: {test_accuracy * 100:.2f}%')
-
-
-plt.plot(history.history['accuracy'])
-plt.plot(history.history['val_accuracy'])
-plt.title('Model accuracy')
-plt.ylabel('Accuracy')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Validation'], loc='upper left')
-plt.show()
-
-# Plot training & validation loss values
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.title('Model loss')
-plt.ylabel('Loss')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Validation'], loc='upper left')
-plt.show()
-test_loss, test_accuracy = model.evaluate(X_test, y_test)
-print(f'Test loss: {test_loss}')
-print(f'Test accuracy: {test_accuracy}')
-
-
-
-# Test the model on the remaining 10% test data
-y_pred = model.predict(X_test)
-y_pred_classes = np.argmax(y_pred, axis=1)
-accuracy = np.mean(y_pred_classes == y_test)
-print(f"Classification Accuracy on Test Data: {accuracy * 100:.2f}%")
-
-            </pre></p>
-            <h4> 10</h4>
-          
-            <p><pre>
-
-
-import numpy as np
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv1D, MaxPooling1D, Flatten, Dense, Dropout, BatchNormalization
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.callbacks import EarlyStopping, LearningRateScheduler
-import matplotlib.pyplot as plt
-import time
-
-# Load the IRIS dataset (assuming you have it in a CSV file)
-iris_df = pd.read_csv("iris.csv")
-
-# Split data into features and labels
-X = iris_df.drop('species', axis=1)
-y = iris_df['species']
-
-# Encode the labels
-label_encoder = LabelEncoder()
-y = label_encoder.fit_transform(y)
-
-# Split the data into training, validation, and test sets
-X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.2, random_state=42)
-X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
-
-# Reshape the input data for 1D CNN
-X_train = np.array(X_train).reshape(X_train.shape[0], X_train.shape[1], 1)
-X_val = np.array(X_val).reshape(X_val.shape[0], X_val.shape[1], 1)
-X_test = np.array(X_test).reshape(X_test.shape[0], X_test.shape[1], 1)
-
-# Create the model
-model = Sequential()
-model.add(Conv1D(filters=32, kernel_size=3, activation='relu', input_shape=(4, 1)))
-model.add(MaxPooling1D(pool_size=2))
-model.add(BatchNormalization())
-model.add(Flatten())
-model.add(Dense(units=128, activation='relu'))  # Increased units
-model.add(Dropout(0.5))
-model.add(Dense(units=3, activation='softmax'))
-
-# Compile the model with a custom learning rate scheduler
-initial_lr = 0.0005  # Reduced learning rate
-lr_schedule = LearningRateScheduler(lambda epoch: initial_lr * 0.95 ** epoch)
-model.compile(loss='sparse_categorical_crossentropy',
-              optimizer=Adam(learning_rate=initial_lr),
-              metrics=['accuracy'])
-
-# Define early stopping callback
-early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
-
-# Measure the training time
-start_time = time.time()
-
-# Train the model
-history = model.fit(X_train, y_train, epochs=100, batch_size=32, validation_data=(X_val, y_val), callbacks=[lr_schedule, early_stopping])
-
-# Calculate training time
-training_time = time.time() - start_time
-print(f"Training Time: {training_time:.2f} seconds")
-
-# Plot training history
-plt.plot(history.history['accuracy'], label='train_accuracy')
-plt.plot(history.history['val_accuracy'], label='val_accuracy')
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy')
-plt.ylim([0, 1])
-plt.legend(loc='lower right')
-plt.show()
-
-# Evaluate the model on test data
-test_loss, test_accuracy = model.evaluate(X_test, y_test)
-print(f"Test Loss: {test_loss:.4f}")
-print(f"Test Accuracy: {test_accuracy:.4f}")
-
-# Test the model on the remaining 10% test data
-y_pred = model.predict(X_test)
-y_pred_classes = np.argmax(y_pred, axis=1)
-accuracy = np.mean(y_pred_classes == y_test)
-print(f"Classification Accuracy on Test Data: {accuracy * 100:.2f}%")    
-            </pre></p>
-
-
-        </div>
-</div>
-</body> 
-</html> 
+    </div>
+   
+</body>
+</html>
