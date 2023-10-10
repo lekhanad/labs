@@ -425,6 +425,125 @@
         Training Time: 5.84 seconds
         Test Loss: 0.3077
         Test Accuracy: 100.00%
+
+
+
+
+
+
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split from sklearn.preprocessing import LabelEncoder
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout from tensorflow.keras.optimizers import Adam, Adagrad import matplotlib.pyplot as plt
+
+            iris_df = pd.read_csv("iris1.csv")
+ 
+            X = iris_df.drop('species', axis=1) y = iris_df['species']
+
+label_encoder = LabelEncoder()
+y = label_encoder.fit_transform(y)
+  
+ 
+X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.2, random_state=42) X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
+
+model = Sequential()
+model.add(Dense(units=128, activation='relu', input_dim=4)) model.add(Dropout(0.5))
+model.add(Dense(units=64, activation='relu')) model.add(Dense(units=3, activation='softmax'))
+ model.compile(loss='sparse_categorical_crossentropy',
+optimizer=Adagrad(learning_rate=0.001), metrics=['accuracy'])
+history = model.fit(X_train, y_train, epochs=100, batch_size=16, validation_data=(X_val, y_val))
+
+plt.plot(history.history['accuracy'], label='train_accuracy') plt.plot(history.history['val_accuracy'], label = 'val_accuracy') plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.ylim([0, 1])
+plt.legend(loc='lower right')
+plt.show()
+
+test_loss, test_accuracy = model.evaluate(X_test, y_test) print(f"Test Loss: {test_loss:.4f}")
+print(f"Test Accuracy: {test_accuracy:.4f}")
+
+y_pred = model.predict(X_test)
+y_pred_classes = np.argmax(y_pred, axis=1)
+accuracy = np.mean(y_pred_classes == y_test)
+print(f"Classification Accuracy on Test Data: {accuracy * 100:.2f}%")
+
+
+
+
+
+
+
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv1D, MaxPooling1D, Flatten, Dense, Dropout,
+BatchNormalization
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import EarlyStopping, LearningRateScheduler
+import matplotlib.pyplot as plt
+import time
+
+iris_df = pd.read_csv("iris1.csv")
+
+X = iris_df.drop('species', axis=1)
+y = iris_df['species']
+
+label_encoder = LabelEncoder()
+y = label_encoder.fit_transform(y)
+
+X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.2, random_state=42)
+X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
+
+X_train = np.array(X_train).reshape(X_train.shape[0], X_train.shape[1], 1)
+X_val = np.array(X_val).reshape(X_val.shape[0], X_val.shape[1], 1)
+X_test = np.array(X_test).reshape(X_test.shape[0], X_test.shape[1], 1)
+
+model = Sequential()
+model.add(Conv1D(filters=32, kernel_size=3, activation='relu', input_shape=(4, 1)))
+model.add(MaxPooling1D(pool_size=2))
+model.add(BatchNormalization())
+model.add(Flatten())
+model.add(Dense(units=128, activation='relu')) # Increased units
+model.add(Dropout(0.5))
+model.add(Dense(units=3, activation='softmax'))
+
+initial_lr = 0.0005 # Reduced learning rate
+lr_schedule = LearningRateScheduler(lambda epoch: initial_lr * 0.95 ** epoch)
+model.compile(loss='sparse_categorical_crossentropy',
+optimizer=Adam(learning_rate=initial_lr),
+metrics=['accuracy'])
+
+early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
+
+start_time = time.time()
+
+history = model.fit(X_train, y_train, epochs=100, batch_size=32, validation_data=(X_val,
+y_val), callbacks=[lr_schedule, early_stopping])
+
+training_time = time.time() - start_time
+print(f"Training Time: {training_time:.2f} seconds")
+
+test_loss, test_accuracy = model.evaluate(X_val, y_val, verbose=0)
+print(f"Test Loss: {test_loss:.4f}")
+print(f"Test Accuracy: {test_accuracy * 100:.2f}%")
+
+plt.plot(history.history['accuracy'], label='train_accuracy')
+plt.plot(history.history['val_accuracy'], label='val_accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.ylim([0, 1])
+plt.legend(loc='lower right')
+plt.show()
+Output:
+Training Time: 5.84 seconds
+
     </pre>
     </div>
    
